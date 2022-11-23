@@ -57,7 +57,7 @@ const Footer = () => {
           <div className="flex">
             <p className=" text-gray-800 mr-1">Address:</p>
             
-              12, Oxygen, Chittagong, Bangladesh
+              oxygen, Chittagong, Bangladesh
          
           </div>
         </div>
