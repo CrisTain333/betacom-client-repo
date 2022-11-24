@@ -1,13 +1,17 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import icon from '../../image/icons8-the-flash-sign.svg'
 import CategoriesCard from "../../Shared/CategoriesCard/CategoriesCard";
 const ProductCategories = () => {
-    const [data,setData]=useState();
-useEffect(()=>{
-    fetch('Category.json')
-    .then(res => res.json())
-    .then(data => setData(data))
-},[])
+      
+const {data:category = []} = useQuery({
+  queryKey:['category'],
+  queryFn: async()=>{
+    const res = await fetch('http://localhost:5000/category')
+    const data = await res.json()
+    return data;
+  }
+})
 
 
   return (
@@ -31,7 +35,7 @@ useEffect(()=>{
     <div className="relative mx-auto max-w-7xl">
       <div className="grid max-w-lg gap-5 mx-auto lg:grid-cols-3 lg:max-w-none">
     {
-        data?.map((e,i)=><CategoriesCard key={i+1}  data={e}></CategoriesCard>)
+      category?.map((e,i)=><CategoriesCard key={i+1}  data={e}></CategoriesCard>)
     }
       </div>
     </div>

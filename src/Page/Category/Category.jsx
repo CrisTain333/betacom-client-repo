@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import CategoryProductCard from "../../Shared/Category Product Card/CategoryProductCard";
+import BookingModal from "./Booking modal/BookingModal";
 
 const Category = () => {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   const data =  useLoaderData();
+  const [bookingProduct,setBookingProduct]=useState(null);
+  console.log(bookingProduct);
   return (
     <div>
     <h1 className="text-3xl text-center">BetaCom is offering the best Second-hand  Laptops For You</h1>
@@ -12,12 +16,16 @@ const Category = () => {
           <div className="relative mx-auto max-w-7xl">
             <div className="grid max-w-lg gap-5 mx-auto lg:grid-cols-3 lg:max-w-none">
                {
-                data?.map(product => <CategoryProductCard key={product._id} data={product}/>)
+                data?.map(product => <CategoryProductCard key={product._id} data={product} setBookingProduct={setBookingProduct}/>)
                }
             </div>
           </div>
         </div>
       </section>
+      {
+        bookingProduct&&  <BookingModal bookingProduct={bookingProduct} setBookingProduct={setBookingProduct}></BookingModal>
+      }
+    
     </div>
   );
 };

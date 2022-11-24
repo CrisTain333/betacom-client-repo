@@ -36,7 +36,7 @@ const Advertised = () => {
           <div className="flex-1">
             <a href="/blog-post">
               <div className="flex pt-6 space-x-1 text-sm text-gray-500">
-                <time datetime="2020-03-10"> Mar 10, 2020 </time>
+                <time > Mar 10, 2020 </time>
                 <span aria-hidden="true"> · </span>
                 <span> 4 min read </span>
               </div>
@@ -60,7 +60,7 @@ const Advertised = () => {
           <div className="flex-1">
             <a href="/blog-post">
               <div className="flex pt-6 space-x-1 text-sm text-gray-500">
-                <time datetime="2020-03-10"> Mar 10, 2020 </time>
+                <time > Mar 10, 2020 </time>
                 <span aria-hidden="true"> · </span>
                 <span> 4 min read </span>
               </div>
@@ -84,7 +84,7 @@ const Advertised = () => {
           <div className="flex-1">
             <a href="/blog-post">
               <div className="flex pt-6 space-x-1 text-sm text-gray-500">
-                <time datetime="2020-03-10"> Mar 10, 2020 </time>
+                <time > Mar 10, 2020 </time>
                 <span aria-hidden="true"> · </span>
                 <span> 4 min read </span>
               </div>
