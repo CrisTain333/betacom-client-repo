@@ -1,0 +1,135 @@
+[
+    {
+        "categoryId":"01",
+        "img":"https://i.ibb.co/jZc9Rmv/0-91657-13-inch-Mac-Book-Pro-side-2-xl.jpg",
+        "brandName":"Apple",
+        "productName":"Apple Macbook Air 13.3 inch 2021",
+        "ResalePrice":"550",
+        "originalPrice":"975",
+        "YearsOfUse":"1",
+        "location":"Agrabad,Chittagong,Bangladesh",
+        "sellerName":"Michaerl Andreuzza",
+        "publishTime":"Nov 22, 2022 09:34 AM",
+        "isVerifyed": false,
+        "isReported": false
+    },
+    {
+        "categoryId":"01",
+        "img":"https://i.ibb.co/Zhtqrb7/F25.webp",
+        "brandName":"Apple",
+        "productName":"Apple MacBook Pro 16-Inch M1 Pro Chip, 16GB RAM, 1TB SSD (MK1F3ZP/A) Silver 2021",
+        "ResalePrice":"650",
+        "originalPrice":"1375",
+        "YearsOfUse":"1",
+        "location":"Fatickchari,Chittagong,Bangladesh",
+        "sellerName":"Meheraz Ducone",
+        "publishTime":"Nov 13, 2022 08:34 AM",
+        "isVerifyed": true,
+        "isReported": false
+    },
+    {
+        "categoryId":"01",
+        "img":"https://i.ibb.co/XDV7nzf/macbook-air-m1-gold-10.jpg",
+        "brandName":"Apple",
+        "productName":"Apple MacBook Air 13.3-Inch Retina Display 8-core Apple M1 chip with 8GB RAM, 512GB SSD (MGNE3) Golden",
+        "ResalePrice":"450",
+        "originalPrice":"1174",
+        "YearsOfUse":"2",
+        "location":"Narayanhat,Chittagong,Bangladesh",
+        "sellerName":"Rojaerio Ducone",
+        "publishTime":"Nov 3, 2022 08:34 AM",
+        "isVerifyed": false,
+        "isReported": false
+    },
+    {
+        "categoryId":"02",
+        "img":"https://i.ibb.co/QDjLFfQ/hp-mini-loptop-1590198748-0886a7b4-progressive.jpg",
+        "brandName":"HP",
+        "productName":"HP 15s Core i3 11th Gen 15.6 HD Laptop",
+        "ResalePrice":"355",
+        "originalPrice":"610",
+        "YearsOfUse":"1",
+        "location":"Gulshan,Dhaka,Bangladesh",
+        "sellerName":"Cristain Recoze",
+        "publishTime":"Nov 17, 2022 10:01 AM",
+        "isVerifyed": false,
+        "isReported": false
+
+    },
+    {
+        "categoryId":"02",
+        "img":"https://i.ibb.co/HH1PwFJ/hp-laptop-15-i5-8th-gen-12gb-r-1626069531-72c6602c.jpg",
+        "brandName":"HP",
+        "productName":"HP 15s-du1116TU Pentium Silver N5030 15.6 HD Laptop",
+        "ResalePrice":"437",
+        "originalPrice":"810",
+        "YearsOfUse":"1",
+        "location":"Nouga,Dhaka,Bangladesh",
+        "sellerName":"stafigo Rdo",
+        "publishTime":"Nov 11, 2022 03:01 AM",
+        "isVerifyed": true,
+        "isReported": false
+
+    },
+    {
+        "categoryId":"02",
+        "img":"https://i.ibb.co/DW0DRrL/cheap-used-hp-laptop-1597504948-31aa22d6-progressive.jpg",
+        "brandName":"HP",
+        "productName":"HP 250 G8 Core i3 11th Gen 15.6 FHD Laptop",
+        "ResalePrice":"320",
+        "originalPrice":"710",
+        "YearsOfUse":"1",
+        "location":"Gulistan,Dhaka,Bangladesh",
+        "sellerName":"Melifa Rdo",
+        "publishTime":"Nov 4, 2022 04:01 AM",
+        "isVerifyed": false,
+        "isReported": false
+
+    },
+    {
+        "categoryId":"03",
+        "img":"https://i.ibb.co/wBzRL0L/72207442.webp",
+        "brandName":"DELL",
+        "productName":"Dell Inspiron 15 3511 Core i3 11th Gen 15.6 FHD Laptop",
+        "ResalePrice":"190",
+        "originalPrice":"510",
+        "YearsOfUse":"2",
+        "location":"Noyabajar,Roujan,Bangladesh",
+        "sellerName":"Cristain Recoze",
+        "publishTime":"Nov 11, 2022 08:22 AM",
+        "isVerifyed": false,
+        "isReported": false
+
+    },
+    {
+        "categoryId":"03",
+        "img":"https://i.ibb.co/nzfzFNC/20200222-145351-scaled.jpg",
+        "brandName":"DELL",
+        "productName":"Dell XPS 15 9510 Core i7 11th Gen RTX 3050 Ti 4GB Graphics 15.6 FHD Laptop",
+        "ResalePrice":"390",
+        "originalPrice":"710",
+        "YearsOfUse":"1",
+        "location":"oxygen,chittagong,Bangladesh",
+        "sellerName":"Sakib Mahmud",
+        "publishTime":"Nov 13, 2022 09:22 AM",
+        "isVerifyed": true,
+        "isReported": false
+
+    }
+    ,
+    {
+        "categoryId":"03",
+        "img":"https://i.ibb.co/LJwWzhs/used-dell-laptop-dell-inspiron-1597165786-24058b06.jpg",
+        "brandName":"DELL",
+        "productName":"Dell Latitude 14 5420 Core i5 11th Gen 14 Full HD Laptop",
+        "ResalePrice":"390",
+        "originalPrice":"610",
+        "YearsOfUse":"2",
+        "location":"Gc,chittagong,Bangladesh",
+        "sellerName":"Amirul Islam",
+        "publishTime":"Nov 6, 2022 10:22 AM",
+        "isVerifyed": false,
+        "isReported": false
+
+    }
+]
