@@ -1,9 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import AuthContext from "../../Context/Context";
 import googlelogo from "../../image/ggl.png";
 import brandLogo from '../../image/nav.png'
 
 const Login = () => {
+    const [error,setError]=useState('');
+    const {singInUser , googleLogin} = useContext(AuthContext);
+    let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+    console.log(singInUser)
+    const handleLogin = (e)=>{
+        e.preventDefault()
+        const form = e.target;
+        const email =  form.email.value;
+        const password = form.password.value;
+        singInUser(email,password)
+        .then(result => {
+            navigate(from, { replace: true });
+        })
+        .catch(err =>{
+            setError(err.message)
+        })
+    }
+
+    const handleGoogleLogin = () =>{
+        googleLogin()
+        .then(result=>{
+            navigate(from, { replace: true });
+        })
+        .catch(err =>{
+            setError(err.message)
+        })
+    }
+
+
   return (
     <div>
       <section class="">
@@ -15,7 +47,7 @@ const Login = () => {
                   <img src={brandLogo} alt="brandImage" className="w-8 mr-2" />
                   Login
                 </span>
-                <form action="#" method="POST" class="space-y-6">
+                <form onSubmit={handleLogin} class="space-y-6">
                   <div>
                     <label
                       for="email"
@@ -60,13 +92,13 @@ const Login = () => {
 
                   <div class="flex items-center justify-between">
                     <div class="text-sm">
-                      <a
+                      <Link
                         href="#"
                         class="font-medium text-blue-600 hover:text-blue-500"
                       >
                         {" "}
                         Forgot your password?{" "}
-                      </a>
+                      </Link>
                     </div>
                   </div>
 
@@ -77,6 +109,7 @@ const Login = () => {
                     >
                       Login
                     </button>
+                    <p className="text-red-500">{error}</p>
                   </div>
                 </form>
                 <div class="relative my-4">
@@ -94,6 +127,7 @@ const Login = () => {
                   <button
                     type="submit"
                     class="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    onClick={handleGoogleLogin}
                   >
                     <div class="flex items-center justify-center">
                       <img src={googlelogo} className="h-10" alt="" />

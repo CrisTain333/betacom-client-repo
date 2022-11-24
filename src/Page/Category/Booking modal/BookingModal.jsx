@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../../Context/Context";
 
 const BookingModal = ({setBookingProduct,bookingProduct}) => {
-    console.log(bookingProduct)
+    const {user} = useContext(AuthContext)
     const {productName , ResalePrice} = bookingProduct
     const handleProductBooking =(e)=>{
         e.preventDefault()
@@ -28,7 +29,7 @@ const BookingModal = ({setBookingProduct,bookingProduct}) => {
           >
             <input
               type="text"
-              disabled
+              readOnly
               value= {`$ ${ResalePrice}`}
               className="input w-full input-bordered  text-lg font-medium"
             />
@@ -37,13 +38,13 @@ const BookingModal = ({setBookingProduct,bookingProduct}) => {
               type="text"
               placeholder="Your Name"
               className="input w-full input-bordered dark:border-red-50 dark:bg-gray-900 dark:text-gray-100"
-            //   defaultValue={user?.displayName}
+              defaultValue={user?.displayName}
               readOnly
             />
             <input
               name="email"
               type="email"
-            //   defaultValue={user?.email}
+              defaultValue={user?.email}
               readOnly
               placeholder="Email Address"
               className="input w-full input-bordered dark:border-red-50 dark:bg-gray-900 dark:text-gray-100"
