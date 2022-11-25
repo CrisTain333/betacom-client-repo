@@ -5,7 +5,7 @@ import { ThreeCircles } from "react-loader-spinner";
 import "./payment.css";
 
 const CheckoutForm = ({ data }) => {
-  const { ResalePrice, _id } = data;
+  const { ResalePrice, _id ,productName } = data;
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
@@ -85,6 +85,7 @@ const CheckoutForm = ({ data }) => {
         name,
         address,
         bookingId: _id,
+        productName,
       };
       fetch("http://localhost:5000/payments", {
         method: "POST",

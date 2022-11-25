@@ -35,10 +35,10 @@ const DashBoardLayout = () => {
               <>
                 <li>
                   <Link
-                    href="/"
+                    to="/dashboard/add/product"
                     aria-label="Our product"
                     title="Our product"
-                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400 bg-gray-200"
+                    className="font-medium tracking-wide bg-primary text-white transition-colors duration-200 hover:text-deep-purple-accent-400"
                   >
                     Add A product
                   </Link>
@@ -46,7 +46,7 @@ const DashBoardLayout = () => {
                 <li>
                   <Link
                     to="/dashboard/my/products"
-                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                    className="font-medium tracking-wide bg-primary text-white mt-3 transition-colors duration-200 hover:text-deep-purple-accent-400"
                   >
                     My Products
                   </Link>
@@ -60,7 +60,7 @@ const DashBoardLayout = () => {
                     to="/dashboard"
                     aria-label="Our product"
                     title="Our product"
-                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400 bg-primary text-white my-3"
+                    className="font-medium tracking-wide  transition-colors duration-200 hover:text-deep-purple-accent-400 bg-primary text-white my-3"
                   >
                   <AiOutlineShoppingCart></AiOutlineShoppingCart>
                     My Orders

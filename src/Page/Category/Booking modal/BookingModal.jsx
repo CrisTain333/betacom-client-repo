@@ -17,6 +17,7 @@ const BookingModal = ({ setBookingProduct, bookingProduct }) => {
       email: user.email,
       name: user.displayName,
       phone: form.phone.value,
+      meetingLocation : form.meetingLocation.value
     };
     // axios POST request
     const options = {
@@ -74,6 +75,12 @@ const BookingModal = ({ setBookingProduct, bookingProduct }) => {
               defaultValue={user?.email}
               readOnly
               placeholder="Email Address"
+              className="input w-full input-bordered dark:border-red-50 dark:bg-gray-900 dark:text-gray-100"
+            />
+            <input
+              name="meetingLocation"
+              type="text"
+              placeholder="Meeting Location"
               className="input w-full input-bordered dark:border-red-50 dark:bg-gray-900 dark:text-gray-100"
             />
             <input
