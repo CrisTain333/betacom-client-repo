@@ -1,17 +1,28 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
+import AuthContext from "../../../Context/Context";
 
 const AddProduct = () => {
   const [isLoading, setLoading] = useState(false);
+  const {user} = useContext(AuthContext);
+  const current = new Date();
+    const time = current.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const today  = new Date();
+    const options = {  year: 'numeric', month: 'short', day: 'numeric' };
+
+    const date = today.toLocaleDateString("en-US", options)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const productName = form.productName.value;
     const productPrice = form.productPrice.value;
-    const brandName = form.brandName.value;
+    // const brandName = form.brandName.value;
     const phoneNumber = form.phoneNumber.value;
     const location = form.location.value;
     const yearOfPurchase = form.yearOfPurchase.value;
@@ -34,7 +45,7 @@ const AddProduct = () => {
           const product = {
             productName,
             productPrice,
-            brandName,
+            // brandName,
             phoneNumber,
             location,
             yearOfPurchase,
@@ -42,6 +53,9 @@ const AddProduct = () => {
             conditionType,
             description,
             img: data.data.display_url,
+            email: user?.email,
+            date,
+            time
           };
 
           const options = {
@@ -106,7 +120,20 @@ const AddProduct = () => {
             </div>
           </div>
           <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div class="w-full md:w-1/2 px-3">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-password"
+              >
+                Product Image
+              </label>
+              <input
+                type="file"
+                className="file-input file-input-bordered file-input-primary w-full max-w-xs"
+                name="image"
+              />
+            </div>
+            {/* <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                 for="grid-first-name"
@@ -121,7 +148,7 @@ const AddProduct = () => {
                 <option value="HP">HP</option>
                 <option value="DELL">DELL</option>
               </select>
-            </div>
+            </div> */}
             <div class="w-full md:w-1/2 px-3">
               <label
                 class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -197,7 +224,7 @@ const AddProduct = () => {
             </div>
           </div>
           <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
+            {/* <div class="w-full px-3">
               <label
                 class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                 for="grid-password"
@@ -209,7 +236,7 @@ const AddProduct = () => {
                 className="file-input file-input-bordered file-input-primary w-full max-w-xs"
                 name="image"
               />
-            </div>
+            </div> */}
           </div>
 
           <div class="flex flex-wrap -mx-3 mb-6">
