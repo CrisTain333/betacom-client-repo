@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/Context";
@@ -17,7 +18,28 @@ const Login = () => {
         const password = form.password.value;
         singInUser(email,password)
         .then(result => {
-            navigate(from, { replace: true });
+          const user = result.user;
+        const userEmail = {
+          email : user.email
+        }
+          const options = {
+            url: 'http://localhost:5000/jwt',
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: userEmail
+          };
+          axios(options)
+          .then(response => {
+
+            if(response.status === 200){
+              const token = response.data
+              localStorage.setItem('authToken',token)
+              navigate(from, { replace: true });
+            }
+            });
         })
         .catch(err =>{
             setError(err.message)

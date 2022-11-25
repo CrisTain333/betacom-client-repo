@@ -22,7 +22,6 @@ const SingUp = () => {
     const email = form.email.value;
     const accountType = form.accountType.value;
     const password = form.password.value;
-    console.log(name, email, accountType, password);
     if (password.length < 6) {
       setError("Password Must Be > 6");
       return;
@@ -117,7 +116,7 @@ const SingUp = () => {
                   <img src={brandLogo} alt="brandImage" className="w-8 mr-2" />
                   Login
                 </span>
-                <form onSubmit={handleAccountCreate} className="space-y-6">
+                <form onSubmit={handleAccountCreate} className="">
                   <div>
                     <label
                       htmlFor="email"
@@ -189,7 +188,7 @@ const SingUp = () => {
                     <select
                       required
                       name="accountType"
-                      className="select select-bordered w-full max-w-xs"
+                      className="select select-bordered py-3 w-full max-w-xs"
                     >
                       <option value="normalUser" className="p-5">
                         Normal User
@@ -204,7 +203,7 @@ const SingUp = () => {
                     </div>
                   </div>
 
-                  <div>
+                  <div className="py-5">
                     <button
                       type="submit"
                       className="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-primary rounded-xl"

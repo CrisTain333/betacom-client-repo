@@ -31,6 +31,7 @@ const UserContext = ({children}) => {
     };
   
     const singOutUser = () => {
+      localStorage.removeItem('authToken')
       setLoading(true);
       signOut(auth)
         .then(() => {})

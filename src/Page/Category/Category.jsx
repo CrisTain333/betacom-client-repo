@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import CategoryProductCard from "../../Shared/Category Product Card/CategoryProductCard";
 import BookingModal from "./Booking modal/BookingModal";
@@ -7,9 +8,13 @@ const Category = () => {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   const data =  useLoaderData();
   const [bookingProduct,setBookingProduct]=useState(null);
-  console.log(bookingProduct);
+
   return (
     <div>
+    <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
     <h1 className="text-3xl text-center">BetaCom is offering the best Second-hand  Laptops For You</h1>
       <section>
         <div className="relative  py-12 sm:px-6 lg:py-16 lg:px-8">

@@ -1,18 +1,46 @@
+import axios from "axios";
 import React, { useContext } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import AuthContext from "../../../Context/Context";
 
-const BookingModal = ({setBookingProduct,bookingProduct}) => {
-    const {user} = useContext(AuthContext)
-    const {productName , ResalePrice} = bookingProduct
-    const handleProductBooking =(e)=>{
-        e.preventDefault()
-        const form = e.target
+const BookingModal = ({ setBookingProduct, bookingProduct }) => {
+  const { user } = useContext(AuthContext);
+  const { productName, ResalePrice,img } = bookingProduct;
 
-    }
+  const handleProductBooking = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const booking = {
+      productName,
+      img,
+      ResalePrice,
+      email: user.email,
+      name: user.displayName,
+      phone: form.phone.value,
+    };
+    // axios POST request
+    const options = {
+      url: "http://localhost:5000/bookings",
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+      data: booking,
+    };
+
+    axios(options).then((response) => {
+      if(response.data.acknowledged){
+        toast.success('Successfully Booked')
+        setBookingProduct(null);
+      }
+    });
+  };
   return (
     <>
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />
       <div className="modal">
+      
         <div className="modal-box relative">
           <label
             htmlFor="my-modal-3"
@@ -20,17 +48,16 @@ const BookingModal = ({setBookingProduct,bookingProduct}) => {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">
-            {productName}
-          </h3>
+          <h3 className="text-lg font-bold">{productName}</h3>
           <form
             onSubmit={handleProductBooking}
             className="grid grid-cols-1 gap-3 mt-10 "
           >
             <input
               type="text"
+              name="resalePrice"
               readOnly
-              value= {`$ ${ResalePrice}`}
+              value={`$ ${ResalePrice}`}
               className="input w-full input-bordered  text-lg font-medium"
             />
             <input
@@ -58,7 +85,7 @@ const BookingModal = ({setBookingProduct,bookingProduct}) => {
             />
             <br />
             <input
-              className="btn btn-primary bg-gradient-to-r from-primary to-secondary w-full dark:border-red-50 dark:bg-gray-900 dark:text-gray-100"
+              className="btn btn-primary text-white w-full dark:border-red-50 dark:bg-gray-900 dark:text-gray-100"
               type="submit"
               value="Book"
             />

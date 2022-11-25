@@ -8,6 +8,7 @@ import MyProducts from "../Page/Dashboard/My Products/MyProducts";
 import Home from "../Page/Home/Home";
 import Login from "../Page/Login/Login";
 import SingUp from "../Page/Login/SingUp";
+import Payment from "../Page/Payment/Payment";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -38,11 +39,11 @@ const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element: <DashBoardLayout></DashBoardLayout>,
+    element:<PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
     children:[
       {
         path :'/dashboard',
-        element: <MyOrders></MyOrders>
+        element:<MyOrders></MyOrders>
       },
       {
         path:'/dashboard/users',
@@ -51,6 +52,12 @@ const router = createBrowserRouter([
       {
         path:'/dashboard/my/products',
         element: <MyProducts></MyProducts>
+      },
+      {
+        path:'/dashboard/payment/:id',
+        loader: async({params})=> fetch(`http://localhost:5000/bookings/${params.id}`),
+        element: <Payment></Payment>
+
       }
     ]
 

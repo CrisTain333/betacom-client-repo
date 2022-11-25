@@ -12,7 +12,6 @@ const useNormalUser = email => {
 
               axios(options)
               .then(response => {
-                console.log(response)
                 setNormalUser(response.data.isNormalUser);
                 setIsNormalUseroading(false)
               });
