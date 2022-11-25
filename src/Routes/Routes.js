@@ -4,6 +4,7 @@ import MainLayout from "../Layout/MainLayout";
 import Category from "../Page/Category/Category";
 import AllUsers from "../Page/Dashboard/All Users/AllUsers";
 import MyOrders from "../Page/Dashboard/My Orders/MyOrders";
+import MyProducts from "../Page/Dashboard/My Products/MyProducts";
 import Home from "../Page/Home/Home";
 import Login from "../Page/Login/Login";
 import SingUp from "../Page/Login/SingUp";
@@ -42,13 +43,15 @@ const router = createBrowserRouter([
       {
         path :'/dashboard',
         element: <MyOrders></MyOrders>
-
       },
       {
         path:'/dashboard/users',
         element: <AllUsers></AllUsers>
       },
-      
+      {
+        path:'/dashboard/my/products',
+        element: <MyProducts></MyProducts>
+      }
     ]
 
   }

@@ -1,22 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../Context/Context";
-import useAdmin from "../../hooks/useAdmin";
 import logo from "../../image/nav.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [setIsAdmin] = useAdmin();
-  const { user, singOutUser, setUser } = useContext(AuthContext);
-  const isBuyer = false;
-  const isSellers = false;
-  const [isAdmin] = useAdmin(user?.email);
-  console.log(isAdmin);
+  const { user, singOutUser} = useContext(AuthContext)
 
-  const handleSingOut = () => {
-    setUser(null);
-    singOutUser();
-  };
 
   // const li = (
 
@@ -124,7 +114,8 @@ const Navbar = () => {
             </span>
           </Link>
           <ul className="flex items-center hidden space-x-8 lg:flex">
-            <li>
+            {
+              user&&<li>
               <Link
                 to="/dashboard"
                 aria-label="About us"
@@ -133,6 +124,7 @@ const Navbar = () => {
                 DashBoard
               </Link>
             </li>
+            }
             <li>
               <Link
                 href="/"
@@ -151,7 +143,7 @@ const Navbar = () => {
                   className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-gray-700 transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                   aria-label="Sign up"
                   title="Sign up"
-                  onClick={handleSingOut}
+                  onClick={singOutUser}
                 >
                   Sing Out
                 </button>
@@ -224,7 +216,27 @@ const Navbar = () => {
                   </div>
                   <nav>
                     <ul className="space-y-4">
-                      {/* {li} */}
+                    {
+              user&&<li>
+              <Link
+                to="/dashboard"
+                aria-label="About us"
+                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+              >
+                DashBoard
+              </Link>
+            </li>
+            }
+            <li>
+              <Link
+                href="/"
+                aria-label="About us"
+                title="About us"
+                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+              >
+                Blog
+              </Link>
+            </li>
                       <li>
                         {user ? (
                           <button
