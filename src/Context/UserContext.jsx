@@ -16,6 +16,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 const UserContext = ({children}) => {
+  
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
   
@@ -30,10 +31,10 @@ const UserContext = ({children}) => {
     };
   
     const singOutUser = () => {
+      setLoading(true);
       signOut(auth)
         .then(() => {})
         .catch((error) => {});
-      setLoading(true);
     };
   
     const updateUser = (name) => {
@@ -68,6 +69,7 @@ const UserContext = ({children}) => {
             user,
             singOutUser,
             singInUser,
+            setUser,
             loading,
           }}>
             {children}

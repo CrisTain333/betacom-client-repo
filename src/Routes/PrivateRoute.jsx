@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }) => {
                           width="150"
                           color="#f82c38"
                           wrapperStyle={{}}
-                          wrapperClass=""
+                          wrapperclassName=""
                           visible={true}
                           ariaLabel="three-circles-rotating"
                           outerCircleColor=""

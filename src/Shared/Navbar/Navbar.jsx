@@ -1,70 +1,113 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../Context/Context";
+import useAdmin from "../../hooks/useAdmin";
 import logo from "../../image/nav.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, singOutUser } = useContext(AuthContext);
-const isBuyer = true;
-const isSaller = true;
-const admin =  true;
+  const [setIsAdmin] = useAdmin();
+  const { user, singOutUser, setUser } = useContext(AuthContext);
+  const isBuyer = false;
+  const isSellers = false;
+  const [isAdmin] = useAdmin(user?.email);
+  console.log(isAdmin);
 
+  const handleSingOut = () => {
+    setUser(null);
+    singOutUser();
+  };
 
-  const li = (
-    <>
-      <li>
-        <Link
-          href="/"
-          aria-label="Our product"
-          title="Our product"
-          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-        >
-          My Orders
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/"
-          aria-label="Our product"
-          title="Our product"
-          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-        >
-        Add A product
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/"
-          aria-label="Product pricing"
-          title="Product pricing"
-          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-        >
-         My Products
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/"
-          aria-label="About us"
-          title="About us"
-          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-        >
-          All Sellers
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/"
-          aria-label="About us"
-          title="About us"
-          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-        >
-          About us
-        </Link>
-      </li>
-    </>
-  );
+  // const li = (
+
+  //   <>
+  //   {
+  //     isSellers&&<>
+  //     <li>
+  //       <Link
+  //         href="/"
+  //         aria-label="Our product"
+  //         title="Our product"
+  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+  //       >
+  //       Add A product
+  //       </Link>
+  //     </li>
+  //     <li>
+  //       <Link
+  //         href="/"
+  //         aria-label="Product pricing"
+  //         title="Product pricing"
+  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+  //       >
+  //        My Products
+  //       </Link>
+  //     </li>
+
+  //     </>
+  //   }
+  //   {
+  //     isBuyer&&<>
+  //     <li>
+  //       <Link
+  //         href="/"
+  //         aria-label="Our product"
+  //         title="Our product"
+  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+  //       >
+  //         My Orders
+  //       </Link>
+  //     </li>
+  //     </>
+  //   }
+  //   {
+  //     isAdmin?<>
+
+  //     <li>
+  //       <Link
+  //         href="/"
+  //         aria-label="About us"
+  //         title="About us"
+  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+  //       >
+  //         All Sellers
+  //       </Link>
+  //     </li>
+  //     <li>
+  //       <Link
+  //         href="/"
+  //         aria-label="About us"
+  //         title="About us"
+  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+  //       >
+  //         All Buyers
+  //       </Link>
+  //     </li>
+  //     <li>
+  //       <Link
+  //         href="/"
+  //         aria-label="About us"
+  //         title="About us"
+  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+  //       >
+  //         Reported Items
+  //       </Link>
+  //     </li>
+  //     </>:''
+  //   }
+
+  //     <li>
+  //       <Link
+  //         href="/"
+  //         aria-label="About us"
+  //         title="About us"
+  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+  //       >
+  //         Blog
+  //       </Link>
+  //     </li>
+  //   </>
+  // );
   return (
     <div>
       <div className="px-4 py-5 z-50 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -80,7 +123,27 @@ const admin =  true;
               etacom
             </span>
           </Link>
-          <ul className="flex items-center hidden space-x-8 lg:flex">{li}</ul>
+          <ul className="flex items-center hidden space-x-8 lg:flex">
+            <li>
+              <Link
+                to="/dashboard"
+                aria-label="About us"
+                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+              >
+                DashBoard
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/"
+                aria-label="About us"
+                title="About us"
+                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+              >
+                Blog
+              </Link>
+            </li>
+          </ul>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
               {user ? (
@@ -88,7 +151,7 @@ const admin =  true;
                   className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-gray-700 transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                   aria-label="Sign up"
                   title="Sign up"
-                  onClick={singOutUser}
+                  onClick={handleSingOut}
                 >
                   Sing Out
                 </button>
@@ -161,7 +224,7 @@ const admin =  true;
                   </div>
                   <nav>
                     <ul className="space-y-4">
-                      {li}
+                      {/* {li} */}
                       <li>
                         {user ? (
                           <button
