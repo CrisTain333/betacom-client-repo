@@ -16,13 +16,17 @@ const AddProduct = () => {
     const options = {  year: 'numeric', month: 'short', day: 'numeric' };
 
     const date = today.toLocaleDateString("en-US", options)
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        
+        
+        
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
     const productName = form.productName.value;
     const productPrice = form.productPrice.value;
-    // const brandName = form.brandName.value;
+    const brandName = form.brandName.value;
     const phoneNumber = form.phoneNumber.value;
     const location = form.location.value;
     const yearOfPurchase = form.yearOfPurchase.value;
@@ -33,6 +37,17 @@ const AddProduct = () => {
     formData.append("image", image);
     const description = form.description.value;
     const uri = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgKey}`;
+    let categoryId;
+    if(brandName === 'Apple'){
+        categoryId = '01'
+    }
+    if(brandName === 'HP'){
+        categoryId = '02'
+    }
+    if(brandName === 'DELL'){
+        categoryId = '03'
+    }
+
 
     setLoading(true)
     fetch(uri, {
@@ -43,19 +58,19 @@ const AddProduct = () => {
       .then((data) => {
         if (data.status === 200) {
           const product = {
-            productName,
-            productPrice,
-            // brandName,
-            phoneNumber,
-            location,
-            yearOfPurchase,
-            originalPrice,
-            conditionType,
-            description,
+            categoryId,
             img: data.data.display_url,
+            brandName,
+            productName,
+            ResalePrice:productPrice,
+            originalPrice,
+            YearsOfUse:yearOfPurchase,
+            location,
+            sellerName:user.displayName,
+            publishTime:`${date} ${time}`,
+            isVerifyed: false,
+            isReported: false,
             email: user?.email,
-            date,
-            time
           };
 
           const options = {
@@ -83,47 +98,47 @@ const AddProduct = () => {
   return (
     <div>
     <Toaster></Toaster>
-      <div class="max-w-screen-md mx-auto p-5">
-        <div class="text-center mb-16">
-          <h3 class="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight text-gray-900">
-            Add A <span class="text-primary">Product</span>
+      <div className="max-w-screen-md mx-auto p-5">
+        <div className="text-center mb-16">
+          <h3 className="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight text-gray-900">
+            Add A <span className="text-primary">Product</span>
           </h3>
         </div>
 
-        <form class="w-full" onSubmit={handleSubmit}>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <form className="w-full" onSubmit={handleSubmit}>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-first-name"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-first-name"
               >
                 Product Name
               </label>
               <input
-                class="appearance-none block w-full  text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                className="appearance-none block w-full  text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 type="text"
                 name="productName"
               />
             </div>
-            <div class="w-full md:w-1/2 px-3">
+            <div className="w-full md:w-1/2 px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-last-name"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-last-name"
               >
                 Product Price
               </label>
               <input
-                class="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 name="productPrice"
                 type="number"
               />
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-          <div class="w-full md:w-1/2 px-3">
+          <div className="flex flex-wrap -mx-3 mb-6">
+          {/* <div className="w-full md:w-1/2 px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-password"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-password"
               >
                 Product Image
               </label>
@@ -132,11 +147,11 @@ const AddProduct = () => {
                 className="file-input file-input-bordered file-input-primary w-full max-w-xs"
                 name="image"
               />
-            </div>
-            {/* <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            </div> */}
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-first-name"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-first-name"
               >
                 Brand Name
               </label>
@@ -148,67 +163,67 @@ const AddProduct = () => {
                 <option value="HP">HP</option>
                 <option value="DELL">DELL</option>
               </select>
-            </div> */}
-            <div class="w-full md:w-1/2 px-3">
+            </div>
+            <div className="w-full md:w-1/2 px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-last-name"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-last-name"
               >
                 Phone Number
               </label>
               <input
-                class="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 name="phoneNumber"
                 type="number"
               />
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-first-name"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-first-name"
               >
                 Location
               </label>
               <input
-                class="appearance-none block w-full  text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                className="appearance-none block w-full  text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 name="location"
                 type="text"
               />
             </div>
-            <div class="w-full md:w-1/2 px-3">
+            <div className="w-full md:w-1/2 px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-last-name"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-last-name"
               >
                 Year of purchase
               </label>
               <input
-                class="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 name="yearOfPurchase"
                 type="number"
               />
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-first-name"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-first-name"
               >
                 Original Price
               </label>
               <input
-                class="appearance-none block w-full  text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                className="appearance-none block w-full  text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 name="originalPrice"
                 type="number"
               />
             </div>
-            <div class="w-full md:w-1/2 px-3">
+            <div className="w-full md:w-1/2 px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-last-name"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-last-name"
               >
                 Condition Type
               </label>
@@ -223,11 +238,11 @@ const AddProduct = () => {
               </select>
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            {/* <div class="w-full px-3">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-password"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-password"
               >
                 Product Image
               </label>
@@ -236,26 +251,26 @@ const AddProduct = () => {
                 className="file-input file-input-bordered file-input-primary w-full max-w-xs"
                 name="image"
               />
-            </div> */}
+            </div>
           </div>
 
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="grid-password"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+               htmlFor="grid-password"
               >
                 Description
               </label>
               <textarea
                 rows="3"
-                class="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 name="description"
               ></textarea>
             </div>
-            <div class="flex justify-center w-full px-3">
+            <div className="flex justify-center w-full px-3">
               <button
-                class="shadow bg-primary hover:bg-red-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
+                className="shadow bg-primary hover:bg-red-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
                 type="submit"
               >
               {

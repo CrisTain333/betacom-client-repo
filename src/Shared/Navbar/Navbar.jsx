@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../Context/Context";
 import logo from "../../image/nav.png";
+import { AiOutlineDoubleRight } from 'react-icons/ai';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -113,6 +114,13 @@ const Navbar = () => {
               etacom
             </span>
           </Link>
+          <label
+            htmlFor="my-drawer-2"
+            className="drawer-button lg:hidden"
+          >
+           <AiOutlineDoubleRight className="text-3xl font-bold mb-4 text-black"></AiOutlineDoubleRight>
+           
+          </label>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             {
               user&&<li>

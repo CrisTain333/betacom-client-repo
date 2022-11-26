@@ -6,6 +6,8 @@ import useNormalUser from "../../hooks/useNormalUser";
 import useSellerAccount from "../../hooks/useSellerAccount";
 import Navbar from "../../Shared/Navbar/Navbar";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { FaLuggageCart } from 'react-icons/fa';
+import { IoBagAddSharp } from 'react-icons/io5';
 
 const DashBoardLayout = () => {
   const { user} = useContext(AuthContext);
@@ -20,12 +22,7 @@ const DashBoardLayout = () => {
         <div className="drawer-content mr-0 lg:mr-5 lg:ml-5 ml-0">
           {/* <!-- Page content here --> */}
           <Outlet></Outlet>
-          <label
-            htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
-          >
-            Open drawer
-          </label>
+         
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -33,6 +30,17 @@ const DashBoardLayout = () => {
             {/* <!-- Sidebar content here --> */}
             {isSellerAccount && (
               <>
+              <li>
+                  <Link
+                    to="/dashboard"
+                    aria-label="Our product"
+                    title="Our product"
+                    className="font-medium tracking-wide  transition-colors duration-200 hover:text-deep-purple-accent-400 bg-primary text-white my-3"
+                  >
+                  <AiOutlineShoppingCart></AiOutlineShoppingCart>
+                    My Orders
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to="/dashboard/add/product"
@@ -40,6 +48,7 @@ const DashBoardLayout = () => {
                     title="Our product"
                     className="font-medium tracking-wide bg-primary text-white transition-colors duration-200 hover:text-deep-purple-accent-400"
                   >
+                  <IoBagAddSharp></IoBagAddSharp>
                     Add A product
                   </Link>
                 </li>
@@ -48,6 +57,7 @@ const DashBoardLayout = () => {
                     to="/dashboard/my/products"
                     className="font-medium tracking-wide bg-primary text-white mt-3 transition-colors duration-200 hover:text-deep-purple-accent-400"
                   >
+                  <FaLuggageCart></FaLuggageCart>
                     My Products
                   </Link>
                 </li>

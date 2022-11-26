@@ -1,62 +1,62 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Advertised from "./Advertised";
 import ProductCategories from "./ProductCategories";
+import brnadImage from '../../image/top-view-freelance-asian-lady-using-laptop-shopping-online-with-credit-card-table.jpg'
 
 const Home = () => {
+
+  const {data : advertisedProduct = [] } = useQuery({
+    queryKey:['advertisedProduct'],
+    queryFn: async()=>{
+      const res = await fetch('http://localhost:5000/product/advertisedProduct')
+      const data = res.json()
+      return data
+    }
+  })
+  console.log(advertisedProduct)
+
+
   return (
     <div>
-      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-        <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
-          <div className="flex flex-col mb-16 sm:text-center sm:mb-0">
-            <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-              <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                <span className="relative inline-block">
-                  <svg
-                    viewBox="0 0 52 24"
-                    fill="currentColor"
-                    className="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-32 lg:-mt-10 sm:block"
-                  >
-                    <defs>
-                      <pattern
-                        id="e77df901-b9d7-4b9b-822e-16b2d410795b"
-                        x="0"
-                        y="0"
-                        width=".135"
-                        height=".30"
-                      >
-                        <circle cx="1" cy="1" r=".7" />
-                      </pattern>
-                    </defs>
-                    <rect
-                      fill="url(#e77df901-b9d7-4b9b-822e-16b2d410795b)"
-                      width="52"
-                      height="24"
-                    />
-                  </svg>
-                  <span className="relative text-primary">Betacom</span>
-                </span>{" "}
-                is The Best Second-Hand Products Buy Sale Online Platform In The
-                Market
-              </h2>
-              <p className="text-base text-gray-700 md:text-lg">
-                " Your Trust Is Our Future Path "
-              </p>
-            </div>
-            <div>
-              <a
-                href="/"
-                className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-primary text-white transition duration-200 rounded shadow-md"
-              >
-                Get started
-              </a>
-            </div>
-          </div>
+      
+      <div className="relative flex flex-col-reverse py-16 lg:pt-0 lg:flex-col lg:pb-0">
+      <div className="inset-y-0 top-0 right-0 z-0 w-full max-w-xl px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
+        <svg
+          className="absolute left-0 hidden h-full text-white transform -translate-x-1/2 lg:block"
+          viewBox="0 0 100 100"
+          fill="currentColor"
+          preserveAspectRatio="none slice"
+        >
+          <path d="M50 0H100L50 100H0L50 0Z" />
+        </svg>
+        <img
+          className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
+          src={brnadImage}
+          alt=""
+        />
+      </div>
+      <div className="relative flex flex-col items-start w-full max-w-xl px-4 mx-auto md:px-0 lg:px-8 lg:max-w-screen-xl">
+        <div className="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
+          <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight text-primary sm:text-4xl sm:leading-none">
+          Betacom <br />
+            <span className="inline-block text-deep-purple-accent-400 text-gray-700">
+            is The Best Second-Hand Products Buy Sale Online Market
+            </span>
+          </h2>
+          <p className="pr-5 mb-5 text-base text-gray-700 md:text-lg">
+          " Your Trust Is Our Future Path "
+          </p>
         </div>
       </div>
+    </div>
 
       {/* Advertised Section */}
       <div>
-        <Advertised></Advertised>
+      {advertisedProduct&&<Advertised data={advertisedProduct}></Advertised>}
+      
+       
+       
       </div>
 
 

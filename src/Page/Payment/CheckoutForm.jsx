@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
 import "./payment.css";
+import { FaAmazonPay } from 'react-icons/fa';
 
 const CheckoutForm = ({ data }) => {
   const { ResalePrice, _id ,productName } = data;
@@ -160,7 +161,7 @@ const CheckoutForm = ({ data }) => {
           <div className="mx-auto">
           <button
             type="submit"
-            className="btn btn-primary text-white mx-auto "
+            className="btn btn-primary text-white mx-auto"
             disabled={!stripe}
           >
             {processing ? (
@@ -177,7 +178,7 @@ const CheckoutForm = ({ data }) => {
                 middleCircleColor=""
               />
             ) : (
-              "Pay"
+              <FaAmazonPay className="text-5xl text-white"></FaAmazonPay>
             )}
           </button>
 
