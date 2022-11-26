@@ -108,7 +108,6 @@ const AddProduct = () => {
                 };
               }
               setLoading(false);
-              setLoading(false)
             })
           
         }

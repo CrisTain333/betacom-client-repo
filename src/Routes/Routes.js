@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashBoardLayout from "../Layout/DashboardLayout/DashBoardLayout";
 import MainLayout from "../Layout/MainLayout";
+import ErrorPage from "../Page/404 Page/ErrorPage";
 import Blog from "../Page/Blog/Blog";
 import Category from "../Page/Category/Category";
 import AddProduct from "../Page/Dashboard/Add Product/AddProduct";
@@ -92,5 +93,9 @@ const router = createBrowserRouter([
       }
     ],
   },
+  {
+    path:'*',
+    element: <ErrorPage></ErrorPage>
+  }
 ]);
 export default router;

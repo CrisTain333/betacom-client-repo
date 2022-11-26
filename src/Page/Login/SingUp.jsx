@@ -36,8 +36,8 @@ const SingUp = () => {
       .then((result) => {
         const user = result.user;
         const userEmail = {
-          email : user.email
-        }
+          email: user.email,
+        };
 
         const usersInfo = {
           email: user.email,
@@ -59,26 +59,24 @@ const SingUp = () => {
             };
 
             axios(options).then((response) => {
-              if(response.data.acknowledged){
+              if (response.data.acknowledged) {
                 const options = {
-                  url: 'http://localhost:5000/jwt',
-                  method: 'POST',
+                  url: "http://localhost:5000/jwt",
+                  method: "POST",
                   headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=UTF-8'
+                    Accept: "application/json",
+                    "Content-Type": "application/json;charset=UTF-8",
                   },
-                  data: userEmail
+                  data: userEmail,
                 };
-                axios(options)
-                .then(response => {
-
-                  if(response.status === 200){
-                    const token = response.data
-                    localStorage.setItem('authToken',token)
+                axios(options).then((response) => {
+                  if (response.status === 200) {
+                    const token = response.data;
+                    localStorage.setItem("authToken", token);
                     setIsLoading(false);
                     navigate(from, { replace: true });
                   }
-                  });
+                });
               }
             });
           })
@@ -91,9 +89,6 @@ const SingUp = () => {
         setError(err.message);
       });
   };
-
-
-
 
   const handleGoogleLogin = () => {
     googleLogin()

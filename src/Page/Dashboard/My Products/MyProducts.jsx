@@ -4,8 +4,9 @@ import AuthContext from "../../../Context/Context";
 import { AiFillDelete } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
 import { IoIosDoneAll } from "react-icons/io";
+import axios from "axios";
 const MyProducts = () => {
-  const { user } = useContext(AuthContext);
+  const { user, singOutUser } = useContext(AuthContext);
   const {
     data: sellerProduct = [],
     isLoading,
@@ -21,6 +22,9 @@ const MyProducts = () => {
           },
         }
       );
+      if (res.status === 401 || res.status === 403) {
+        return singOutUser();
+      }
       const data = await res.json();
       return data;
     },
@@ -37,11 +41,11 @@ const MyProducts = () => {
       .then((data) => {
         if (data.modifiedCount > 0) {
           toast.success("advertised SuccessFull");
-          refetch()
+          refetch();
         }
       });
   };
-  const handleDelete = (id) =>{
+  const handleDelete = (id) => {
     fetch(`http://localhost:5000/products/${id}`, {
       method: "DELETE",
       headers: {
@@ -52,15 +56,16 @@ const MyProducts = () => {
       .then((data) => {
         if (data.deletedCount > 0) {
           toast.success("Deleted SuccessFull");
-          refetch()
+          refetch();
         }
       });
-
-  }
+  };
 
   return (
     <div>
-      <h2 className="text-3xl text-center  lg:text-start">My Products {sellerProduct?.length}</h2>
+      <h2 className="text-3xl text-center  lg:text-start">
+        My Products {sellerProduct?.length}
+      </h2>
       <div className="overflow-x-auto mt-5 w-[95%] mx-auto  lg:w-full">
         <Toaster></Toaster>
         <table className="table w-full">
@@ -78,7 +83,10 @@ const MyProducts = () => {
             {sellerProduct?.map((p, i) => (
               <tr key={p._id}>
                 <th>
-                  <button className="btn btn-circle btn-outline" onClick={() => handleDelete(p._id)}>
+                  <button
+                    className="btn btn-circle btn-outline"
+                    onClick={() => handleDelete(p._id)}
+                  >
                     <AiFillDelete className="text-2xl"></AiFillDelete>
                   </button>
                 </th>
@@ -108,7 +116,10 @@ const MyProducts = () => {
                   >
                     {p.advertise && p.advertise === true && (
                       <>
-                      <label className="flex justify-center items-center text-green-500 font-semibold">  advertised <IoIosDoneAll className="text-2xl" /></label>
+                        <label className="flex justify-center items-center text-green-500 font-semibold">
+                          {" "}
+                          advertised <IoIosDoneAll className="text-2xl" />
+                        </label>
                       </>
                     )}
                     {p?.advertise !== true && "advertise"}
