@@ -71,6 +71,9 @@ const AddProduct = () => {
             isVerifyed: false,
             isReported: false,
             email: user?.email,
+            description,
+            phoneNumber,
+            conditionType
           };
 
           const options = {
@@ -86,6 +89,7 @@ const AddProduct = () => {
             if(response.data.acknowledged){
                 toast.success('Successfully Product Added');
                 setLoading(false)
+                form.reset()
             }
           });
         }
@@ -118,6 +122,7 @@ const AddProduct = () => {
                 className="appearance-none block w-full  text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 type="text"
                 name="productName"
+                required
               />
             </div>
             <div className="w-full md:w-1/2 px-3">
@@ -131,23 +136,11 @@ const AddProduct = () => {
                 className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 name="productPrice"
                 type="number"
+                required
               />
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
-          {/* <div className="w-full md:w-1/2 px-3">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-password"
-              >
-                Product Image
-              </label>
-              <input
-                type="file"
-                className="file-input file-input-bordered file-input-primary w-full max-w-xs"
-                name="image"
-              />
-            </div> */}
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -156,6 +149,7 @@ const AddProduct = () => {
                 Brand Name
               </label>
               <select
+              required
                 name="brandName"
                 className=" block w-full text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               >
@@ -175,6 +169,7 @@ const AddProduct = () => {
                 className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 name="phoneNumber"
                 type="number"
+                required
               />
             </div>
           </div>
@@ -190,6 +185,7 @@ const AddProduct = () => {
                 className="appearance-none block w-full  text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 name="location"
                 type="text"
+                required
               />
             </div>
             <div className="w-full md:w-1/2 px-3">
@@ -203,6 +199,7 @@ const AddProduct = () => {
                 className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 name="yearOfPurchase"
                 type="number"
+                required
               />
             </div>
           </div>
@@ -218,6 +215,7 @@ const AddProduct = () => {
                 className="appearance-none block w-full  text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 name="originalPrice"
                 type="number"
+                required
               />
             </div>
             <div className="w-full md:w-1/2 px-3">
@@ -228,6 +226,7 @@ const AddProduct = () => {
                 Condition Type
               </label>
               <select
+              required
                 name="conditionType"
                 id=""
                 className=" block w-full text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -247,6 +246,7 @@ const AddProduct = () => {
                 Product Image
               </label>
               <input
+              required
                 type="file"
                 className="file-input file-input-bordered file-input-primary w-full max-w-xs"
                 name="image"
@@ -263,6 +263,7 @@ const AddProduct = () => {
                 Description
               </label>
               <textarea
+              required
                 rows="3"
                 className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 name="description"
@@ -288,7 +289,7 @@ const AddProduct = () => {
                 middleCircleColor=""
               />
 
-                </>: 'Submit'
+                </>: 'Add'
               }
                
               </button>

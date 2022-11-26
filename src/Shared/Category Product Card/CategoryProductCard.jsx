@@ -1,5 +1,9 @@
 import React from "react";
 import verifyLogo from "../../image/verify.png";
+import { MdReport } from 'react-icons/md';
+
+
+
 const CategoryProductCard = ({ data ,setBookingProduct }) => {
   const {
     img,
@@ -70,6 +74,7 @@ const CategoryProductCard = ({ data ,setBookingProduct }) => {
         <label htmlFor="my-modal-3" className="btn bg-primary text-white mt-5" onClick={()=>setBookingProduct(data)}>
           Book now
         </label>
+        <button className="flex items-center font-bold text-lg mt-5 hover:text-blue-500 w-20"><MdReport></MdReport>Report</button>
       </div>
     </div>
   );

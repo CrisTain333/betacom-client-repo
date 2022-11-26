@@ -41,7 +41,7 @@ const Home = () => {
           <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight text-primary sm:text-4xl sm:leading-none">
           Betacom <br />
             <span className="inline-block text-deep-purple-accent-400 text-gray-700">
-            is The Best Second-Hand Products Buy Sale Online Market
+            is The Best Second-Hand Laptops Buy Sale Online Market
             </span>
           </h2>
           <p className="pr-5 mb-5 text-base text-gray-700 md:text-lg">

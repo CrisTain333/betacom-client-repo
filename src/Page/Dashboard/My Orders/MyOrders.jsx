@@ -29,9 +29,9 @@ const MyOrders = () => {
 
   return (
     <div>
-      <h2 className="text-3xl">MY Orders : {bookings?.length}</h2>
+      <h2 className="text-3xl text-center  lg:text-start">MY Orders : {bookings?.length}</h2>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mt-5 w-[95%] mx-auto  lg:w-full">
         <table className="table table-zebra w-full">
           {/* <!-- head --> */}
           <thead>

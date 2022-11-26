@@ -41,11 +41,28 @@ const MyProducts = () => {
         }
       });
   };
+  const handleDelete = (id) =>{
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        if (data.deletedCount > 0) {
+          toast.success("Deleted SuccessFull");
+          refetch()
+        }
+      });
+
+  }
 
   return (
     <div>
-      <h2 className="text-3xl">My Products {sellerProduct?.length}</h2>
-      <div className="overflow-x-auto">
+      <h2 className="text-3xl text-center  lg:text-start">My Products {sellerProduct?.length}</h2>
+      <div className="overflow-x-auto mt-5 w-[95%] mx-auto  lg:w-full">
         <Toaster></Toaster>
         <table className="table w-full">
           <thead>
@@ -61,7 +78,7 @@ const MyProducts = () => {
             {sellerProduct?.map((p, i) => (
               <tr key={p._id}>
                 <th>
-                  <button className="btn btn-circle btn-outline">
+                  <button className="btn btn-circle btn-outline" onClick={() => handleDelete(p._id)}>
                     <AiFillDelete className="text-2xl"></AiFillDelete>
                   </button>
                 </th>

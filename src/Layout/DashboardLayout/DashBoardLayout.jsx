@@ -6,8 +6,10 @@ import useNormalUser from "../../hooks/useNormalUser";
 import useSellerAccount from "../../hooks/useSellerAccount";
 import Navbar from "../../Shared/Navbar/Navbar";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { FaLuggageCart } from 'react-icons/fa';
+import { FaLuggageCart, FaUsersCog } from 'react-icons/fa';
 import { IoBagAddSharp } from 'react-icons/io5';
+import { TbMessageReport } from 'react-icons/tb';
+import { ImUsers } from 'react-icons/im';
 
 const DashBoardLayout = () => {
   const { user} = useContext(AuthContext);
@@ -82,21 +84,21 @@ const DashBoardLayout = () => {
               <>
                 <li>
                   <Link
-                    href="/"
+                    to="/dashboard/sellers"
                     aria-label="About us"
                     title="About us"
-                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                    className="font-medium tracking-wide bg-primary text-white transition-colors duration-200 hover:text-deep-purple-accent-400 my-3"
                   >
+                  <FaUsersCog></FaUsersCog>
                     All Sellers
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/"
-                    aria-label="About us"
-                    title="About us"
-                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                    to='/dashboard/buyers'
+                    className="font-medium tracking-wide bg-primary text-white transition-colors duration-200 hover:text-deep-purple-accent-400 my-3"
                   >
+                  <ImUsers></ImUsers>
                     All Buyers
                   </Link>
                 </li>
@@ -105,8 +107,9 @@ const DashBoardLayout = () => {
                     href="/"
                     aria-label="About us"
                     title="About us"
-                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                    className="font-medium tracking-wide bg-primary text-white transition-colors duration-200 hover:text-deep-purple-accent-400 my-3"
                   >
+                  <TbMessageReport className="text-lg"></TbMessageReport>
                     Reported Items
                   </Link>
                 </li>
