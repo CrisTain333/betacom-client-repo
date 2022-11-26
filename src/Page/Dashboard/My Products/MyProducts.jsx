@@ -50,7 +50,6 @@ const MyProducts = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         if (data.deletedCount > 0) {
           toast.success("Deleted SuccessFull");
           refetch()
@@ -67,11 +66,12 @@ const MyProducts = () => {
         <table className="table w-full">
           <thead>
             <tr>
-              <th></th>
+              <th>Delete</th>
               <th>Image</th>
+              <th>Product Name</th>
               <th>Price</th>
               <th>Status</th>
-              <th></th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -88,6 +88,9 @@ const MyProducts = () => {
                       <img src={p.img} alt="Tailwind-CSS-Avatar-component" />
                     </div>
                   </div>
+                </td>
+                <td>
+                  <p className="text-lg font-semibold">{p.productName}</p>
                 </td>
                 <td>
                   <strong>${p.ResalePrice}</strong>

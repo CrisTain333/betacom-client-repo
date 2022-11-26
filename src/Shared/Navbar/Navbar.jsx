@@ -144,9 +144,7 @@ const Navbar = () => {
             
             <li>
               <Link
-                href="/"
-                aria-label="About us"
-                title="About us"
+                to="/blog"
                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 Blog
@@ -253,9 +251,7 @@ const Navbar = () => {
             }
             <li>
               <Link
-                href="/"
-                aria-label="About us"
-                title="About us"
+                to="/blog"
                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 Blog

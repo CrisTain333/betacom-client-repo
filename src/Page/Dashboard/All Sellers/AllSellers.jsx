@@ -17,7 +17,23 @@ const AllSellers = () => {
       return data;
     },
   });
-  const handleDelete = () => {};
+  const handleDelete = (id) => {
+
+    fetch(`http://localhost:5000/users/${id}`,{
+        method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    })
+    .then(res => res.json())
+    .then(data=>{
+        if (data.deletedCount > 0) {
+            toast.success("Deleted SuccessFull");
+            refetch()
+          }
+    })
+
+  };
 
   const handleUpdate = (email) => {
     fetch(`http://localhost:5000/users/verify/${email}`, {

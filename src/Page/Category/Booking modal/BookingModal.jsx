@@ -94,7 +94,7 @@ const BookingModal = ({ setBookingProduct, bookingProduct }) => {
             <input
               className="btn btn-primary text-white w-full dark:border-red-50 dark:bg-gray-900 dark:text-gray-100"
               type="submit"
-              value="Book"
+              value="submit"
             />
           </form>
         </div>

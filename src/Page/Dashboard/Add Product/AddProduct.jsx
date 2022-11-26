@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../../Context/Context";
 
 const AddProduct = () => {
   const [isLoading, setLoading] = useState(false);
   const {user} = useContext(AuthContext);
+  const [errorMessage,setErrorMessage]=useState('');
+  const navigate = useNavigate()
   const current = new Date();
     const time = current.toLocaleTimeString("en-US", {
       hour: "2-digit",
@@ -18,6 +21,7 @@ const AddProduct = () => {
     const date = today.toLocaleDateString("en-US", options)
     
     const handleSubmit = (e) => {
+  setErrorMessage('');
         e.preventDefault();
         const form = e.target;
         
@@ -82,19 +86,35 @@ const AddProduct = () => {
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json;charset=UTF-8",
+              authorization: `Bearer ${localStorage.getItem("authToken")}`,
             },
             data: product,
           };
-          axios(options).then((response) => {
-            if(response.data.acknowledged){
-                toast.success('Successfully Product Added');
-                setLoading(false)
-                form.reset()
-            }
-          });
+       
+            axios(options).then((response) => {
+              if(response.data.acknowledged){
+                  toast.success('Successfully Product Added');
+                  setLoading(false)
+                  form.reset()
+                  navigate('/dashboard/my/products')
+  
+              }
+            }).catch(error =>{
+              if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                if(error.response.status === 403){
+                  setErrorMessage(`You Don't Have Permission To Add Product `)
+                };
+              }
+              setLoading(false);
+              setLoading(false)
+            })
+          
         }
       })
-      .catch(err =>{
+      .catch(error =>{
+        console.log(error.response)
         setLoading(false);
       })
   };
@@ -269,6 +289,8 @@ const AddProduct = () => {
                 name="description"
               ></textarea>
             </div>
+
+            <p className="text-red-500 text-lg text-center">{errorMessage}</p>
             <div className="flex justify-center w-full px-3">
               <button
                 className="shadow bg-primary hover:bg-red-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"

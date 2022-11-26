@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { AiFillDelete } from "react-icons/ai";
 
 const AllBuyers = () => {
@@ -17,6 +17,24 @@ const AllBuyers = () => {
           return data;
         },
       });
+
+      const handleDelete = (id) => {
+
+        fetch(`http://localhost:5000/users/${id}`,{
+            method: "DELETE",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        })
+        .then(res => res.json())
+        .then(data=>{
+            if (data.deletedCount > 0) {
+                toast.success("Deleted SuccessFull");
+                refetch()
+              }
+        })
+    
+      };
 
 
 
@@ -50,7 +68,7 @@ const AllBuyers = () => {
                   <td>
                   <button
                       className="btn btn-circle btn-outline bg-primary text-white"
-                    //   onClick={() => handleDelete(seller._id)}
+                      onClick={() => handleDelete(seller._id)}
                     >
                       <AiFillDelete className="text-2xl"></AiFillDelete>
                     </button>
