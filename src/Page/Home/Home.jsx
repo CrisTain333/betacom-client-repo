@@ -3,8 +3,32 @@ import React from "react";
 import Advertised from "./Advertised";
 import ProductCategories from "./ProductCategories";
 import brnadImage from "../../image/top-view-freelance-asian-lady-using-laptop-shopping-online-with-credit-card-table.jpg";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import Steps from "./Steps";
 
 const Home = () => {
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
+
+
   const { data: advertisedProduct = [] } = useQuery({
     queryKey: ["advertisedProduct"],
     queryFn: async () => {
@@ -15,10 +39,9 @@ const Home = () => {
       return data;
     },
   });
-  console.log(advertisedProduct);
 
   return (
-    <div>
+    <div className="mt-10">
       <div className="relative flex flex-col-reverse py-16 lg:pt-0 lg:flex-col lg:pb-0">
         <div className="inset-y-0 top-0 right-0 z-0 w-full max-w-xl px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
           <svg
@@ -60,6 +83,11 @@ const Home = () => {
         {advertisedProduct && (
           <Advertised data={advertisedProduct}></Advertised>
         )}
+      </div>
+      
+
+      <div>
+        <Steps></Steps>
       </div>
     </div>
   );

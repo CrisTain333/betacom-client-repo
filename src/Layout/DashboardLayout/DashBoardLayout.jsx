@@ -33,17 +33,7 @@ const DashBoardLayout = () => {
             {/* <!-- Sidebar content here --> */}
             {isSellerAccount && (
               <>
-              <li>
-                  <Link
-                    to="/dashboard"
-                    aria-label="Our product"
-                    title="Our product"
-                    className="font-medium tracking-wide  transition-colors duration-200 hover:text-deep-purple-accent-400 bg-primary text-white my-3"
-                  >
-                  <AiOutlineShoppingCart></AiOutlineShoppingCart>
-                    My Orders
-                  </Link>
-                </li>
+             
                 <li>
                   <Link
                     to="/dashboard/add/product"
@@ -70,7 +60,7 @@ const DashBoardLayout = () => {
               <>
                 <li>
                   <Link
-                    to="/dashboard"
+                    to="/dashboard/orders"
                     aria-label="Our product"
                     title="Our product"
                     className="font-medium tracking-wide  transition-colors duration-200 hover:text-deep-purple-accent-400 bg-primary text-white my-3"

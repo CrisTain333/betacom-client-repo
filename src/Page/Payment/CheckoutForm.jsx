@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
 import "./payment.css";
-import { FaAmazonPay } from 'react-icons/fa';
 
 const CheckoutForm = ({ data }) => {
   const { ResalePrice, _id ,productName ,productId } = data;
@@ -33,7 +32,6 @@ const CheckoutForm = ({ data }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [cardComplete, setCardComplete] = useState(false);
   const [processing, setProcessing] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -111,8 +109,9 @@ const CheckoutForm = ({ data }) => {
 
   return (
     <div>
+    
      <Toaster></Toaster>
-      <form onSubmit={handleSubmit}  className="ml-5 mr-5 w-full">
+      <form onSubmit={handleSubmit}  className="ml-5 mr-5">
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -138,7 +137,7 @@ const CheckoutForm = ({ data }) => {
           required
           placeholder="Your Address"
         ></textarea>
-
+       
         <CardElement
           options={{
             style: {
@@ -179,7 +178,7 @@ const CheckoutForm = ({ data }) => {
                 middleCircleColor=""
               />
             ) : (
-              <FaAmazonPay className="text-5xl text-white"></FaAmazonPay>
+             `Pay $${ResalePrice}`
             )}
           </button>
 

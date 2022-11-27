@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import verifyLogo from "../../image/verify.png";
-import wishListIcon from "../../image/icons8-wishlist-64.png";
 import AuthContext from "../../Context/Context";
 import toast, { Toaster } from "react-hot-toast";
 import { MdReport } from 'react-icons/md';
@@ -23,6 +22,8 @@ const CategoryProductCard = ({ data, setBookingProduct }) => {
   } = data;
 
   const handleReport = id =>{
+    const agree = window.confirm('Are You Sure You Want To Report')
+   
 
     const reportedItem = {
       productId:id,
@@ -34,7 +35,10 @@ const CategoryProductCard = ({ data, setBookingProduct }) => {
       originalPrice,
       location,
     }
-    fetch(`http://localhost:5000/report/${id}`,{
+
+
+    if(agree){
+      fetch(`http://localhost:5000/report/${id}`,{
       method:'POST',
       headers:{
         'content-type':'application/json '
@@ -46,7 +50,9 @@ const CategoryProductCard = ({ data, setBookingProduct }) => {
       if(data.acknowledged){
         toast.success('Reported Successfully');
       }
-    })
+    }) 
+    }
+    
   }
 
 

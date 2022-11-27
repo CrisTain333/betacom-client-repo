@@ -18,8 +18,9 @@ const AllSellers = () => {
     },
   });
   const handleDelete = (id) => {
-
-    fetch(`http://localhost:5000/users/${id}`,{
+    const agree = window.confirm('Are You Sure You Want To Delete')
+    if(agree){
+      fetch(`http://localhost:5000/users/${id}`,{
         method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -32,10 +33,15 @@ const AllSellers = () => {
             refetch()
           }
     })
+      
+    }
+
+    
 
   };
 
   const handleUpdate = (email) => {
+    
     fetch(`http://localhost:5000/users/verify/${email}`, {
       method: "PUT",
       headers: {

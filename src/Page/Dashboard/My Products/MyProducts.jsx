@@ -4,7 +4,7 @@ import AuthContext from "../../../Context/Context";
 import { AiFillDelete } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
 import { IoIosDoneAll } from "react-icons/io";
-import axios from "axios";
+import { ThreeCircles } from "react-loader-spinner";
 const MyProducts = () => {
   const { user, singOutUser } = useContext(AuthContext);
   const {
@@ -30,6 +30,10 @@ const MyProducts = () => {
     },
   });
 
+
+
+
+
   const handleUpdateAdvertise = (id) => {
     fetch(`http://localhost:5000/products/${id}`, {
       method: "PUT",
@@ -46,20 +50,45 @@ const MyProducts = () => {
       });
   };
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/products/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          toast.success("Deleted SuccessFull");
-          refetch();
-        }
-      });
+    const agree = window.confirm('Are You Sure You Want To Delete')
+    if(agree){
+      fetch(`http://localhost:5000/products/${id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            toast.success("Deleted SuccessFull");
+            refetch();
+          }
+        });
+    }
+  
   };
+
+
+ if(isLoading){
+  <div className="h-1/2 w-full flex justify-center items-center mt-20">
+        <ThreeCircles
+                          height="150"
+                          width="150"
+                          color="#f82c38"
+                          wrapperStyle={{}}
+                          wrapperclassName=""
+                          visible={true}
+                          ariaLabel="three-circles-rotating"
+                          outerCircleColor=""
+                          innerCircleColor=""
+                          middleCircleColor=""
+                        />
+      </div>
+ }
+
+
+
 
   return (
     <div>

@@ -96,7 +96,10 @@ const AddProduct = () => {
                   toast.success('Successfully Product Added');
                   setLoading(false)
                   form.reset()
-                  navigate('/dashboard/my/products')
+                  setTimeout(()=>{
+                    //code goes here
+                    navigate('/dashboard/my/products')
+                 },2000); 
   
               }
             }).catch(error =>{

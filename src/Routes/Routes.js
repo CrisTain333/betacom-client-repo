@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import DashBoardLayout from "../Layout/DashboardLayout/DashBoardLayout";
 import MainLayout from "../Layout/MainLayout";
@@ -8,6 +9,7 @@ import AddProduct from "../Page/Dashboard/Add Product/AddProduct";
 import AllBuyers from "../Page/Dashboard/All Buyers/AllBuyers";
 import AllSellers from "../Page/Dashboard/All Sellers/AllSellers";
 import AllUsers from "../Page/Dashboard/All Users/AllUsers";
+import DafaultDashboard from "../Page/Dashboard/DafaultDashboard";
 import MyOrders from "../Page/Dashboard/My Orders/MyOrders";
 import MyProducts from "../Page/Dashboard/My Products/MyProducts";
 import Reports from "../Page/Dashboard/Reported/Reports";
@@ -18,7 +20,16 @@ import Payment from "../Page/Payment/Payment";
 import DisplayError from "../Shared/Display Error/DisplayError";
 import PrivateRoute from "./PrivateRoute";
 
+
+
+
+
+
+
+
 const router = createBrowserRouter([
+
+
   {
     path: "/",
     element: <MainLayout></MainLayout>,
@@ -62,7 +73,13 @@ const router = createBrowserRouter([
     errorElement: <DisplayError></DisplayError>,
     children: [
       {
-        path: "/dashboard",
+        path:'/dashboard',
+        element: <DafaultDashboard></DafaultDashboard>
+
+      },
+
+      {
+        path: "/dashboard/orders",
         element: <MyOrders></MyOrders>,
       },
       {

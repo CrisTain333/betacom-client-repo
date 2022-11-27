@@ -14,7 +14,7 @@ label {
   color: #6b7c93;
   font-weight: 300;
   letter-spacing: 0.025em;
-  margin-top: 16px;
+  /* margin-top: 16px; */
   display: block;
 }
 
@@ -29,7 +29,7 @@ More info: https://stripe.com/docs/stripe-js/reference#element-options
 .StripeElementEPS,
 .StripeElementFpx {
   display: block;
-  margin: 30px 0 20px 0;
+  margin: 10px 0 20px 0;
   max-width: 375px;
   padding: 10px 14px;
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,

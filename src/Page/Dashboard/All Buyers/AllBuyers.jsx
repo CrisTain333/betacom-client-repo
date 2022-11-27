@@ -19,20 +19,24 @@ const AllBuyers = () => {
       });
 
       const handleDelete = (id) => {
+        const agree = window.confirm('Are You Sure You Want To Delete')
+    if(agree){
+      
+      fetch(`http://localhost:5000/users/${id}`,{
+        method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    })
+    .then(res => res.json())
+    .then(data=>{
+        if (data.deletedCount > 0) {
+            toast.success("Deleted SuccessFull");
+            refetch()
+          }
+    })
 
-        fetch(`http://localhost:5000/users/${id}`,{
-            method: "DELETE",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-        })
-        .then(res => res.json())
-        .then(data=>{
-            if (data.deletedCount > 0) {
-                toast.success("Deleted SuccessFull");
-                refetch()
-              }
-        })
+    }
     
       };
 

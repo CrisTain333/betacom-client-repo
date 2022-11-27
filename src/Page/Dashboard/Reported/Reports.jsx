@@ -4,7 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { AiFillDelete } from "react-icons/ai";
 
 const Reports = () => {
-  const { data: reportedItem = [] , refetch} = useQuery({
+  const { data: reportedItem = [], refetch } = useQuery({
     queryKey: ["reportedItem"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/reports", {
@@ -16,32 +16,30 @@ const Reports = () => {
       return data;
     },
   });
-  const handleDelete =(reports)=>{
-    fetch(`http://localhost:5000/report/${reports.productId}`,{
-        method:'DELETE',
+  const handleDelete = (reports) => {
+    const agree = window.confirm("Are You Sure You Want To Delete");
+    if (agree) {
+      fetch(`http://localhost:5000/report/${reports.productId}`, {
+        method: "DELETE",
         headers: {
-            authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-          body:JSON.stringify(reports)
-    })
-    .then(res => res.json())
-    .then(data =>{
-        if(data.deletedCount){
-            toast.success('Product Deleted SuccessFull')
-            refetch()
-        }
-    })
-
-
-
-
-
-  }
+          authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+        body: JSON.stringify(reports),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            toast.success("Product Deleted SuccessFull");
+            refetch();
+          }
+        });
+    }
+  };
 
   return (
     <div>
       <h2 className="text-3xl">All Reports By Users</h2>
-<Toaster></Toaster>
+      <Toaster></Toaster>
       <div className="overflow-x-auto mt-5">
         <table className="table w-full">
           <thead>
@@ -64,12 +62,16 @@ const Reports = () => {
                 </td>
                 <td>{reports?.productName}</td>
                 <td>{reports?.name}</td>
-                <td>  <button
+                <td>
+                  {" "}
+                  <button
                     className="btn text-white btn-primary"
                     onClick={() => handleDelete(reports)}
                   >
-                    <AiFillDelete className="text-2xl text-white"></AiFillDelete>Delete
-                  </button></td>
+                    <AiFillDelete className="text-2xl text-white"></AiFillDelete>
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
