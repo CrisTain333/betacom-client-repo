@@ -59,7 +59,7 @@ const SingUp = () => {
             };
 
             axios(options).then((response) => {
-              if (response.data.acknowledged) {
+              if (response.data.acknowledged){
                 const options = {
                   url: "http://localhost:5000/jwt",
                   method: "POST",
@@ -93,7 +93,49 @@ const SingUp = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        navigate(from, { replace: true });
+        const user = result.user;
+        const userEmail = {
+          email: user.email,
+        };
+
+        const usersInfo = {
+          email: user.email,
+          name : user.displayName,
+          accountType:'normalUser',
+          isVerifyed: false,
+        };
+
+        const options = {
+          url: "http://localhost:5000/users",
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+          data: usersInfo,
+        };
+
+        axios(options).then((response) => {
+          if (response){
+            const options = {
+              url: "http://localhost:5000/jwt",
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+              },
+              data: userEmail,
+            };
+            axios(options).then((response) => {
+              if (response.status === 200) {
+                const token = response.data;
+                localStorage.setItem("authToken", token);
+                setIsLoading(false);
+                navigate(from, { replace: true });
+              }
+            });
+          }
+        });
       })
       .catch((err) => {
         setError(err.message);

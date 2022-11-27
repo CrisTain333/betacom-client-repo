@@ -104,19 +104,32 @@ const MyProducts = () => {
                   <strong>${p.ResalePrice}</strong>
                 </td>
                 <td>
-                  <div className="badge badge-primary p-3 text-white">
+                
+                  {!p.paid && (
+                      <>
+                      <div className="badge badge-primary p-3 text-white">
                     available
                   </div>
+                      </>
+                    )}
+                    {p.paid && (
+                     
+                  <div className="badge bg-green-500 p-3 text-white">
+                    Sold
+                  </div>
+                    )}
+                
+               
                 </td>
                 <td>
                   <button
                     className="btn  btn-active text-white"
-                    disabled={p.advertise}
+                    disabled={p.advertise || p.paid === true }
                     onClick={() => handleUpdateAdvertise(p._id)}
                   >
                     {p.advertise && p.advertise === true && (
                       <>
-                        <label className="flex justify-center items-center text-green-500 font-semibold">
+                        <label className="flex justify-center items-center text-blue-500 font-semibold">
                           {" "}
                           advertised <IoIosDoneAll className="text-2xl" />
                         </label>

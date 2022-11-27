@@ -10,6 +10,7 @@ import AllSellers from "../Page/Dashboard/All Sellers/AllSellers";
 import AllUsers from "../Page/Dashboard/All Users/AllUsers";
 import MyOrders from "../Page/Dashboard/My Orders/MyOrders";
 import MyProducts from "../Page/Dashboard/My Products/MyProducts";
+import Reports from "../Page/Dashboard/Reported/Reports";
 import Home from "../Page/Home/Home";
 import Login from "../Page/Login/Login";
 import SingUp from "../Page/Login/SingUp";
@@ -89,6 +90,11 @@ const router = createBrowserRouter([
       {
         path:'/dashboard/buyers',
         element: <AllBuyers></AllBuyers>
+
+      },
+      {
+        path:'/dashboard/reports',
+        element: <Reports></Reports>
 
       }
     ],

@@ -10,6 +10,7 @@ import { FaLuggageCart, FaUsersCog } from 'react-icons/fa';
 import { IoBagAddSharp } from 'react-icons/io5';
 import { TbMessageReport } from 'react-icons/tb';
 import { ImUsers } from 'react-icons/im';
+import { RiHeartAddFill } from 'react-icons/ri';
 
 const DashBoardLayout = () => {
   const { user} = useContext(AuthContext);
@@ -104,9 +105,7 @@ const DashBoardLayout = () => {
                 </li>
                 <li>
                   <Link
-                    href="/"
-                    aria-label="About us"
-                    title="About us"
+                    to="/dashboard/reports"
                     className="font-medium tracking-wide bg-primary text-white transition-colors duration-200 hover:text-deep-purple-accent-400 my-3"
                   >
                   <TbMessageReport className="text-lg"></TbMessageReport>

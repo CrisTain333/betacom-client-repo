@@ -43,7 +43,7 @@ const AllBuyers = () => {
         <div>
         <Toaster></Toaster>
         <h2 className="text-3xl text-center lg:text-start">
-          All Sellers : {buyers.length}
+          All buyers : {buyers.length}
         </h2>
   
         <div className="overflow-x-auto">

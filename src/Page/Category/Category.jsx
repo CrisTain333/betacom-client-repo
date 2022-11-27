@@ -8,6 +8,7 @@ const Category = () => {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   const data =  useLoaderData();
   const [bookingProduct,setBookingProduct]=useState(null);
+  console.log(bookingProduct);
 
   return (
     <div>

@@ -14,10 +14,6 @@ const Payment = () => {
         <div>
         <h2 className='text-xl mx-10'>Confirm Your  Payment For {productName}</h2> 
         <p className='text-lg  mx-10'>Price: $<strong>{ResalePrice}</strong></p>
-            
-
-
-
         <div className="w-3/4 mt-10">
         <Elements stripe={stripePromise}>
           <CheckoutForm data={data} />

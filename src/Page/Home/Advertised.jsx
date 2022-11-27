@@ -1,23 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {GiPriceTag,} from "react-icons/gi";
+import { GiPriceTag } from "react-icons/gi";
 import { BiUserCircle, BiTimeFive } from "react-icons/bi";
 import { AiFillPhone } from "react-icons/ai";
 import verifyLogo from "../../image/verify.png";
+import flashGif from "../../image/Flash-Sale-Gif.gif";
+import ini from "../../image/91 Mega Sale Lottie Animations - Free in JSON, LOTTIE, GIF.mp4";
+
 const Advertised = ({ data }) => {
   console.log(data[0]);
   // const {img , productName , sellerName , publishTime , categoryId} = advertisedProduct
   return (
     <div className="my-20">
-      {data[0]?.advertise === true && (
+      {data[0]?.advertise === true && data[0]?.paid !== true && (
         <>
-          <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ">
+          <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen md:px-24 lg:px-8 ">
             <div className="flex items-center justify-center max-w-screen-sm md:flex-row sm:mx-auto">
               <div>
                 <h2 className=" font-sans text-3xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none  flex items-center justify-center">
-                
                   Flash Deals For You
-                
                 </h2>
               </div>
             </div>
@@ -32,12 +33,12 @@ const Advertised = ({ data }) => {
       )}
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="grid max-w-full gap-8 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none">
-          {data[0]?.advertise === true && (
+        <div className="grid max-w-full gap-8 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none ">
+          {data[0]?.advertise === true && data[0]?.paid !== true && (
             <>
               {data.map((p) => (
-                <Link to={`/category/${p.categoryId}`} key={p._id}>
-                  <div class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                <>
+                  <div class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 ">
                     <img
                       class="object-cover object-center w-full h-56"
                       src={p.img}
@@ -62,20 +63,31 @@ const Advertised = ({ data }) => {
                       </h1>
                     </div>
 
-                    <p className="text-base px-6 py-3 text-gray-400 flex items-center"><BiTimeFive className="mr-1"></BiTimeFive>{p.publishTime}</p>
+                    <p className="text-base px-6 py-3 text-gray-400 flex items-center">
+                      <BiTimeFive className="mr-1"></BiTimeFive>
+                      {p.publishTime}
+                    </p>
                     <div class="px-6 pb-5">
                       <h1 class="text-xl font-semibold text-gray-800 dark:text-white">
-                        {p?.productName?.slice(0,30)}
+                        {p?.productName?.slice(0, 30)}
                       </h1>
 
                       <p class="py-2 text-gray-700 dark:text-gray-400">
-                          {p.description?.slice(0,100)}...
+                        {p.description?.slice(0, 100)}...
+                      </p>
+                      <p class="py-2 text-gray-700 dark:text-gray-400">
+                        Condition : {p.conditionType}
                       </p>
 
                       <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-                      <GiPriceTag className='text-2xl'></GiPriceTag>
+                        <GiPriceTag className="text-2xl"></GiPriceTag>
 
-              <h1 class="px-2 text-lg font-medium">${p.originalPrice} <span className="text-gray-400 line-through">{p.ResalePrice}</span></h1>
+                        <h1 class="px-2 text-lg font-medium">
+                          ${p.ResalePrice}{" "}
+                          <span className="text-gray-400 line-through">
+                            {p.originalPrice}
+                          </span>
+                        </h1>
                       </div>
 
                       <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
@@ -102,13 +114,16 @@ const Advertised = ({ data }) => {
                       </div>
 
                       <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-                      <AiFillPhone className="text-2xl"></AiFillPhone>
+                        <AiFillPhone className="text-2xl"></AiFillPhone>
 
                         <h1 class="px-2 text-sm">{p.phoneNumber}</h1>
                       </div>
+                      <button className="btn btn-primary w-full mt-3 text-white">
+                        Book
+                      </button>
                     </div>
                   </div>
-                </Link>
+                </>
               ))}
             </>
           )}

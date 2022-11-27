@@ -6,7 +6,8 @@ import "./payment.css";
 import { FaAmazonPay } from 'react-icons/fa';
 
 const CheckoutForm = ({ data }) => {
-  const { ResalePrice, _id ,productName } = data;
+  const { ResalePrice, _id ,productName ,productId } = data;
+  console.log(productId);
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
