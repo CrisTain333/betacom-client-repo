@@ -23,7 +23,7 @@ const Login = () => {
           email : user.email
         }
           const options = {
-            url: 'http://localhost:5000/jwt',
+            url: 'https://betacom-server-cristain333.vercel.app/jwt',
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -61,7 +61,7 @@ const Login = () => {
           };
   
           const options = {
-            url: "http://localhost:5000/users",
+            url: "https://betacom-server-cristain333.vercel.app/users",
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -73,7 +73,7 @@ const Login = () => {
           axios(options).then((response) => {
             if (response){
               const options = {
-                url: "http://localhost:5000/jwt",
+                url: "https://betacom-server-cristain333.vercel.app/jwt",
                 method: "POST",
                 headers: {
                   Accept: "application/json",
@@ -99,7 +99,7 @@ const Login = () => {
 
   return (
     <div>
-      <section className="">
+      <section className="py-10">
         <div className=" items-center px-5 lg:px-20">
           <div className="flex flex-col w-full max-w-md p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
             <div className="">
@@ -164,13 +164,13 @@ const Login = () => {
                   </div>
 
                   <div>
+                    <p className="text-red-500">{error}</p>
                     <button
                       type="submit"
                       className="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-primary rounded-xl"
                     >
                       Login
                     </button>
-                    <p className="text-red-500">{error}</p>
                   </div>
                 </form>
                 <div className="relative my-4">

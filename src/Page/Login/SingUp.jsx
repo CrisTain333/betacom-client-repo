@@ -22,6 +22,10 @@ const SingUp = () => {
     const email = form.email.value;
     const accountType = form.accountType.value;
     const password = form.password.value;
+    const image = form.image.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const uri = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgKey}`;
     if (password.length < 6) {
       setError("Password Must Be > 6");
       return;
@@ -39,50 +43,73 @@ const SingUp = () => {
           email: user.email,
         };
 
-        const usersInfo = {
-          email: user.email,
-          name,
-          accountType,
-          isVerifyed: false,
-        };
-        updateUser(name)
-          .then((res) => {
-            // axios POST request
-            const options = {
-              url: "http://localhost:5000/users",
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json;charset=UTF-8",
-              },
-              data: usersInfo,
+        
+        //upload Image
+        fetch(uri, {
+          method: "POST",
+          body: formData,
+        })
+        .then((res) => res.json())
+        .then(data =>{
+          if (data.status === 200) {
+
+            const usersInfo = {
+              email: user.email,
+              name,
+              accountType,
+              isVerifyed: false,
+              img:data.data.display_url
             };
 
-            axios(options).then((response) => {
-              if (response.data.acknowledged){
-                const options = {
-                  url: "http://localhost:5000/jwt",
-                  method: "POST",
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json;charset=UTF-8",
-                  },
-                  data: userEmail,
-                };
-                axios(options).then((response) => {
-                  if (response.status === 200) {
-                    const token = response.data;
-                    localStorage.setItem("authToken", token);
-                    setIsLoading(false);
-                    navigate(from, { replace: true });
-                  }
-                });
-              }
+
+
+
+            updateUser(name,data.data.display_url)
+            .then((res) => {
+              // axios POST request
+              const options = {
+                url: "https://betacom-server-cristain333.vercel.app/users",
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json;charset=UTF-8",
+                },
+                data: usersInfo,
+              };
+  
+              axios(options).then((response) => {
+                if (response.data.acknowledged){
+                  const options = {
+                    url: "https://betacom-server-cristain333.vercel.app/jwt",
+                    method: "POST",
+                    headers: {
+                      Accept: "application/json",
+                      "Content-Type": "application/json;charset=UTF-8",
+                    },
+                    data: userEmail,
+                  };
+                  axios(options).then((response) => {
+                    if (response.status === 200) {
+                      const token = response.data;
+                      localStorage.setItem("authToken", token);
+                      setIsLoading(false);
+                      navigate(from, { replace: true });
+                    }
+                  });
+                }
+              });
+            })
+            .catch((err) => {
+              setIsLoading(false);
             });
-          })
-          .catch((err) => {
-            setIsLoading(false);
-          });
+
+
+
+
+          }
+        })
+
+          
       })
       .catch((err) => {
         setIsLoading(false);
@@ -106,7 +133,7 @@ const SingUp = () => {
         };
 
         const options = {
-          url: "http://localhost:5000/users",
+          url: "https://betacom-server-cristain333.vercel.app/users",
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -118,7 +145,7 @@ const SingUp = () => {
         axios(options).then((response) => {
           if (response){
             const options = {
-              url: "http://localhost:5000/jwt",
+              url: "https://betacom-server-cristain333.vercel.app/jwt",
               method: "POST",
               headers: {
                 Accept: "application/json",
@@ -144,14 +171,14 @@ const SingUp = () => {
 
   return (
     <div>
-      <section className="">
+      <section className="py-10">
         <div className=" items-center px-5 lg:px-20">
           <div className="flex flex-col w-full max-w-md p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
             <div className="">
               <div className="">
                 <span className="flex justify-center items-center  w-full text-xl uppercase font-bold mb-4 text-center">
                   <img src={brandLogo} alt="brandImage" className="w-8 mr-2" />
-                  Login
+                  Sing Up
                 </span>
                 <form onSubmit={handleAccountCreate} className="">
                   <div>
@@ -172,6 +199,18 @@ const SingUp = () => {
                         className="block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
                       />
                     </div>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-neutral-600"
+                    >
+                      {" "}
+                      Profile Picture{" "}
+                    </label>
+                    <div className="flex">
+		<input type="file" name="image" id="files" required className="px-5 py-3 border-2 border-dashed rounded-md w-full" />
+	</div>
                   </div>
                   <div>
                     <label
@@ -225,7 +264,7 @@ const SingUp = () => {
                     <select
                       required
                       name="accountType"
-                      className="select select-bordered py-3 w-full max-w-xs"
+                      className="select select-bordered py-3 w-full"
                     >
                       <option value="normalUser" className="p-5">
                         Normal User

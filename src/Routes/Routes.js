@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import DashBoardLayout from "../Layout/DashboardLayout/DashBoardLayout";
 import MainLayout from "../Layout/MainLayout";
@@ -8,7 +7,6 @@ import Category from "../Page/Category/Category";
 import AddProduct from "../Page/Dashboard/Add Product/AddProduct";
 import AllBuyers from "../Page/Dashboard/All Buyers/AllBuyers";
 import AllSellers from "../Page/Dashboard/All Sellers/AllSellers";
-import AllUsers from "../Page/Dashboard/All Users/AllUsers";
 import DafaultDashboard from "../Page/Dashboard/DafaultDashboard";
 import MyOrders from "../Page/Dashboard/My Orders/MyOrders";
 import MyProducts from "../Page/Dashboard/My Products/MyProducts";
@@ -18,7 +16,10 @@ import Login from "../Page/Login/Login";
 import SingUp from "../Page/Login/SingUp";
 import Payment from "../Page/Payment/Payment";
 import DisplayError from "../Shared/Display Error/DisplayError";
+import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
+import SellerRoute from "./SellerRoute";
+import UserRoute from "./UserRoute";
 
 
 
@@ -42,10 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/category/:id",
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/category/${params.id}`),
+          fetch(`https://betacom-server-cristain333.vercel.app/category/${params.id}`),
         element: (
           <PrivateRoute>
-            <Category></Category>{" "}
+            <Category></Category>
           </PrivateRoute>
         ),
       },
@@ -80,38 +81,34 @@ const router = createBrowserRouter([
 
       {
         path: "/dashboard/orders",
-        element: <MyOrders></MyOrders>,
-      },
-      {
-        path: "/dashboard/users",
-        element: <AllUsers></AllUsers>,
+        element:<UserRoute><MyOrders></MyOrders> </UserRoute>
       },
       {
         path: "/dashboard/my/products",
-        element: <MyProducts></MyProducts>,
+        element: <SellerRoute><MyProducts></MyProducts> </SellerRoute>
       },
       {
         path: "/dashboard/payment/:id",
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`),
+          fetch(`https://betacom-server-cristain333.vercel.app/bookings/${params.id}`),
         element: <Payment></Payment>,
       },
       {
         path: "/dashboard/add/product",
-        element: <AddProduct></AddProduct>,
+        element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
       },
       {
         path:'/dashboard/sellers',
-        element: <AllSellers></AllSellers>
+        element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
       },
       {
         path:'/dashboard/buyers',
-        element: <AllBuyers></AllBuyers>
+        element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
 
       },
       {
         path:'/dashboard/reports',
-        element: <Reports></Reports>
+        element:<AdminRoute> <Reports></Reports></AdminRoute>
 
       }
     ],

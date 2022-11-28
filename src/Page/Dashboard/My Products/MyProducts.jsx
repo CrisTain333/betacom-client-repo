@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AuthContext from "../../../Context/Context";
 import { AiFillDelete } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
 import { IoIosDoneAll } from "react-icons/io";
 import { ThreeCircles } from "react-loader-spinner";
+import Myloader from "../../../Shared/MyLoader/Myloader";
 const MyProducts = () => {
+  const [errorMessage,setErrorMessage]=useState('');
   const { user, singOutUser } = useContext(AuthContext);
   const {
     data: sellerProduct = [],
@@ -15,7 +17,7 @@ const MyProducts = () => {
     queryKey: ["sellerProduct", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/products?email=${user?.email}`,
+        `https://betacom-server-cristain333.vercel.app/products?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -35,13 +37,18 @@ const MyProducts = () => {
 
 
   const handleUpdateAdvertise = (id) => {
-    fetch(`http://localhost:5000/products/${id}`, {
+    setErrorMessage('');
+    fetch(`https://betacom-server-cristain333.vercel.app/products/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("authToken")}`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if(res.status === 403){
+          setErrorMessage(`You Don't Have Permission To Advertise Product `)
+        };
+        return res.json()})
       .then((data) => {
         if (data.modifiedCount > 0) {
           toast.success("advertised SuccessFull");
@@ -52,7 +59,7 @@ const MyProducts = () => {
   const handleDelete = (id) => {
     const agree = window.confirm('Are You Sure You Want To Delete')
     if(agree){
-      fetch(`http://localhost:5000/products/${id}`, {
+      fetch(`https://betacom-server-cristain333.vercel.app/products/${id}`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -68,6 +75,10 @@ const MyProducts = () => {
     }
   
   };
+
+  if (isLoading) {
+    return <Myloader></Myloader>;
+  }
 
 
  if(isLoading){
@@ -95,6 +106,7 @@ const MyProducts = () => {
       <h2 className="text-3xl text-center  lg:text-start">
         My Products {sellerProduct?.length}
       </h2>
+      <p className="text-red-500">{errorMessage}</p>
       <div className="overflow-x-auto mt-5 w-[95%] mx-auto  lg:w-full">
         <Toaster></Toaster>
         <table className="table w-full">

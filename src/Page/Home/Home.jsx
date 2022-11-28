@@ -3,37 +3,18 @@ import React from "react";
 import Advertised from "./Advertised";
 import ProductCategories from "./ProductCategories";
 import brnadImage from "../../image/top-view-freelance-asian-lady-using-laptop-shopping-online-with-credit-card-table.jpg";
-import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Steps from "./Steps";
 
 const Home = () => {
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
-  };
+
 
 
   const { data: advertisedProduct = [] } = useQuery({
     queryKey: ["advertisedProduct"],
     queryFn: async () => {
       const res = await fetch(
-        "http://localhost:5000/product/advertisedProduct"
+        "https://betacom-server-cristain333.vercel.app/product/advertisedProduct"
       );
       const data = res.json();
       return data;
@@ -66,16 +47,11 @@ const Home = () => {
                 is The Best Second-Hand Laptops Buy Sale Online Market
               </span>
             </h2>
-            <p className="pr-5 mb-5 text-base text-gray-700 md:text-lg">
+            <p className="pr-5 mb-5 text-xl text-gray-700 md:text-lg">
               " Your Trust Is Our Future Path "
             </p>
           </div>
         </div>
-      </div>
-
-      {/* Product Categories Section */}
-      <div className="my-16">
-        <ProductCategories></ProductCategories>
       </div>
 
       {/* Advertised Section */}
@@ -85,7 +61,12 @@ const Home = () => {
         )}
       </div>
       
+      {/* Product Categories Section */}
+      <div className="my-16">
+        <ProductCategories></ProductCategories>
+      </div>
 
+          {/* Steps Section */}
       <div>
         <Steps></Steps>
       </div>

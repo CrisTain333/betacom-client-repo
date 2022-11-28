@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
-import { ThreeCircles } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import AuthContext from "../../../Context/Context";
 import Myloader from "../../../Shared/MyLoader/Myloader";
@@ -10,13 +9,12 @@ const MyOrders = () => {
 
   const {
     data: bookings = [],
-    refetch,
     isLoading,
   } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/bookings?email=${user?.email}`,
+        `https://betacom-server-cristain333.vercel.app/bookings?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -36,6 +34,7 @@ const MyOrders = () => {
       <h2 className="text-3xl text-center  lg:text-start">
         MY Orders : {bookings?.length}
       </h2>
+      
 
       <div className="overflow-x-auto mt-5 w-[95%] mx-auto  lg:w-full">
         <table className="table table-zebra w-full">

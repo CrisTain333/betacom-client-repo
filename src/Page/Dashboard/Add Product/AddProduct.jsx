@@ -81,7 +81,7 @@ const AddProduct = () => {
           };
 
           const options = {
-            url: "http://localhost:5000/product",
+            url: "https://betacom-server-cristain333.vercel.app/product",
             method: "POST",
             headers: {
               Accept: "application/json",

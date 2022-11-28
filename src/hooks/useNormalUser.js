@@ -7,7 +7,7 @@ const useNormalUser = email => {
     useEffect( () => {
         if (email) {
             const options = {
-                url: `http://localhost:5000/users/normalUser/${email}`
+                url: `https://betacom-server-cristain333.vercel.app/users/normalUser/${email}`
               };
 
               axios(options)

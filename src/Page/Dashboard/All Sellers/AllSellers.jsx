@@ -3,11 +3,18 @@ import React from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiFillDelete } from "react-icons/ai";
 import { VscUnverified, VscVerified } from "react-icons/vsc";
+import Myloader from "../../../Shared/MyLoader/Myloader";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 const AllSellers = () => {
-  const { data: sellers = [], refetch } = useQuery({
+  const {
+    data: sellers = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["sellers"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users/sellers", {
+      const res = await fetch("https://betacom-server-cristain333.vercel.app/users/sellers", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
@@ -18,31 +25,26 @@ const AllSellers = () => {
     },
   });
   const handleDelete = (id) => {
-    const agree = window.confirm('Are You Sure You Want To Delete')
-    if(agree){
-      fetch(`http://localhost:5000/users/${id}`,{
+    const agree = window.confirm("Are You Sure You Want To Delete");
+    if (agree) {
+      fetch(`https://betacom-server-cristain333.vercel.app/users/${id}`, {
         method: "DELETE",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-    })
-    .then(res => res.json())
-    .then(data=>{
-        if (data.deletedCount > 0) {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
             toast.success("Deleted SuccessFull");
-            refetch()
+            refetch();
           }
-    })
-      
+        });
     }
-
-    
-
   };
 
   const handleUpdate = (email) => {
-    
-    fetch(`http://localhost:5000/users/verify/${email}`, {
+    fetch(`https://betacom-server-cristain333.vercel.app/users/verify/${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -58,6 +60,10 @@ const AllSellers = () => {
       });
   };
 
+  if (isLoading) {
+    return <Myloader></Myloader>;
+  }
+
   return (
     <div>
       <Toaster></Toaster>
@@ -70,6 +76,7 @@ const AllSellers = () => {
           <thead>
             <tr>
               <th></th>
+              <th>Image</th>
               <th>Name</th>
               <th>email</th>
               <th>Status</th>
@@ -88,12 +95,25 @@ const AllSellers = () => {
                     <AiFillDelete className="text-2xl"></AiFillDelete>
                   </button>
                 </th>
+                <th>
+                  <PhotoProvider>
+                    <PhotoView src={seller.img}>
+                    <div className="avatar">
+                    <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                      <img src={seller.img} alt="userImage" />
+                    </div>
+                  </div>
+                    </PhotoView>
+                  </PhotoProvider>
+                  
+                </th>
                 <th>{seller.name}</th>
                 <td>{seller.email}</td>
                 <td className=" text-base font-semibold ">
                   {seller.isVerifyed ? (
                     <div className="flex items-center text-green-500 ">
-                      <VscVerified className="mr-1"></VscVerified> verified
+                      <VscVerified className="mr-1 text-blue-500"></VscVerified>{" "}
+                      verified
                     </div>
                   ) : (
                     <div className="flex items-center  text-primary">
@@ -108,9 +128,7 @@ const AllSellers = () => {
                     disabled={seller.isVerifyed === true}
                     onClick={() => handleUpdate(seller.email)}
                   >
-                    {
-                        seller.isVerifyed?'verified':'verify'
-                    }
+                    {seller.isVerifyed ? "verified" : "verify"}
                   </button>
                 </td>
               </tr>

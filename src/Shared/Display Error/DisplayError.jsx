@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
-import { useNavigate, useRouteError } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import AuthContext from '../../Context/Context';
-import UserContext from '../../Context/UserContext';
 import errorImage from '../../image/funny-404-design-with-cyclist-falling-from-bicycle_556049-34.webp'
 
 const DisplayError = () => {
     const {singOutUser} =useContext(AuthContext);
-    const error = useRouteError();
     const navigate = useNavigate();
 
     const handleLogOut = () => {

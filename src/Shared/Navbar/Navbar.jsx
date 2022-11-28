@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../Context/Context";
 import logo from "../../image/nav.png";
 import { AiOutlineDoubleRight } from 'react-icons/ai';
+import { FiLogOut } from 'react-icons/fi';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -159,7 +160,7 @@ const Navbar = () => {
                   
                   onClick={singOutUser}
                 >
-                  Sing Out
+                  Logout <FiLogOut className="ml-1"></FiLogOut>
                 </button>
               ) : (
                 <Link
@@ -265,7 +266,7 @@ const Navbar = () => {
                             title="Sign up"
                             onClick={singOutUser}
                           >
-                            Sing Out
+                            logout
                           </button>
                         ) : (
                           <Link

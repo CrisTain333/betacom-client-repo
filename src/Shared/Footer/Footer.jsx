@@ -19,12 +19,10 @@ const Footer = () => {
           </a>
           <div className="mt-6 lg:max-w-sm">
             <p className="text-sm text-gray-800">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam.
+             Betacom Is the best online merkate to sale used laptops and Trusted By the indastry leaders
             </p>
             <p className="mt-4 text-sm text-gray-800">
-              Eaque ipsa quae ab illo inventore veritatis et quasi architecto
-              beatae vitae dicta sunt explicabo.
+            We All Ways Say That You Trust is Our Future Path
             </p>
           </div>
         </div>
@@ -100,28 +98,19 @@ const Footer = () => {
         </p>
         <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
           <li>
-            <a
-              href="/"
-              className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
-            >
+           
               F.A.Q
-            </a>
+          
           </li>
           <li>
-            <a
-              href="/"
-              className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
-            >
+          
               Privacy Policy
-            </a>
+           
           </li>
           <li>
-            <a
-              href="/"
-              className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
-            >
+           
               Terms &amp; Conditions
-            </a>
+         
           </li>
         </ul>
       </div>

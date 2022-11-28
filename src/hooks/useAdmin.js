@@ -7,7 +7,7 @@ const useAdmin = email => {
     useEffect( () => {
         if (email) {
             const options = {
-                url: `http://localhost:5000/users/admin/${email}`
+                url: `https://betacom-server-cristain333.vercel.app/users/admin/${email}`
               };
 
               axios(options)

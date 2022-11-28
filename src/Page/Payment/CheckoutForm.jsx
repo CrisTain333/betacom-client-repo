@@ -3,18 +3,21 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
 import "./payment.css";
+import logo from '../../image/nav.png'
 
-const CheckoutForm = ({ data }) => {
+const CheckoutForm = ({ data , success ,  setSuccess}) => {
   const { ResalePrice, _id ,productName ,productId } = data;
   console.log(productId);
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
-  const [success, setSuccess] = useState("");
+  // const [success, setSuccess] = useState(true);
   const [transactionId, setTransactionId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://betacom-server-cristain333.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,10 +31,6 @@ const CheckoutForm = ({ data }) => {
       });
   }, [ResalePrice]);
 
-  const [error, setError] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [cardComplete, setCardComplete] = useState(false);
-  const [processing, setProcessing] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -59,7 +58,7 @@ const CheckoutForm = ({ data }) => {
     } else {
       setErrorMessage("");
     }
-
+console.log(paymentMethod)
     setProcessing(true);
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -87,7 +86,7 @@ const CheckoutForm = ({ data }) => {
         bookingId: _id,
         productName,
       };
-      fetch("http://localhost:5000/payments", {
+      fetch("https://betacom-server-cristain333.vercel.app/payments", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -109,8 +108,46 @@ const CheckoutForm = ({ data }) => {
 
   return (
     <div>
-    
-     <Toaster></Toaster>
+    {
+      success?<>
+      <section className="flex flex-col justify-center antialiased text-gray-600 min-h-fit p-4">
+        <div className="h-full">
+          {/* <!-- Card --> */}
+          <div className="max-w-[360px] mx-auto">
+            <div className="bg-white shadow-lg rounded-lg mt-9">
+              {/* <!-- Card header --> */}
+              <header className="text-center px-5 pb-5">
+                {/* <!-- Avatar --> */}
+                <img
+                  className="inline-flex -mt-9 w-[72px] h-[72px] fill-current rounded-full border-4 border-white box-content shadow mb-3"
+                  viewBox="0 0 72 72"
+                  src={logo}
+                  alt="brand"
+                />
+                {/* <!-- Card name --> */}
+                <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  Invoice from <span>Betacom</span>
+                </h3>
+                <p className="text-green-500 text-xl">{success}</p>
+                <div className="text-sm font-medium text-gray-500">
+                Your TransactionId : <span className="font-bold">{transactionId}</span>
+                </div>
+              </header>
+              {/* <!-- Card body --> */}
+              <div className="bg-gray-100 text-center px-5 py-6">
+                <div className="text-sm mb-6">
+                  <h3 className="text-2xl">Payment Completed For</h3>
+                  <strong className="text-xl font-bold text-gray-700">{productName}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      </>:<>
+
+      <Toaster></Toaster>
       <form onSubmit={handleSubmit}  className="ml-5 mr-5">
         <label htmlFor="name">Name</label>
         <input
@@ -186,15 +223,20 @@ const CheckoutForm = ({ data }) => {
         </div>
       </form>
 
-      {success && (
+      </>
+    }
+    
+    
+
+      {/* {success && (
         <div className="mx-10 my-10">
-          <p className="text-green-500 text-xl">{success}</p>
+          
           <p>
             Your transactionId:{" "}
-            <span className="font-bold">{transactionId}</span>
+            
           </p>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

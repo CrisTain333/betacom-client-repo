@@ -7,13 +7,13 @@ import verifyLogo from "../../image/verify.png";
 import AuthContext from "../../Context/Context";
 
 const Advertised = ({ data }) => {
-
 const {user} = useContext(AuthContext)
+console.log(data)
 
   // const {img , productName , sellerName , publishTime , categoryId} = advertisedProduct
   return (
     <div className="my-20">
-      {data[0]?.advertise === true && data[0]?.paid !== true && user && (
+      {data.length !== 0 && (
         <>
           <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen md:px-24 lg:px-8 ">
             <div className="flex items-center justify-center max-w-screen-sm md:flex-row sm:mx-auto">
@@ -35,7 +35,7 @@ const {user} = useContext(AuthContext)
 
       <div className="relative mx-auto max-w-7xl">
         <div className="grid max-w-full gap-8 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none ">
-          {data[0]?.advertise === true && data[0]?.paid !== true && user && (
+          {data && (
             <>
               {data.map((p) => (
                 

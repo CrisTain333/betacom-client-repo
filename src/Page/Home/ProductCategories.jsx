@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
-import icon from '../../image/icons8-the-flash-sign.svg'
+import React from "react";
 import CategoriesCard from "../../Shared/CategoriesCard/CategoriesCard";
 const ProductCategories = () => {
       
 const {data:category = []} = useQuery({
   queryKey:['category'],
   queryFn: async()=>{
-    const res = await fetch('http://localhost:5000/category')
+    const res = await fetch('https://betacom-server-cristain333.vercel.app/category')
     const data = await res.json()
     return data;
   }

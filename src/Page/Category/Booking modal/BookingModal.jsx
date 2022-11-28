@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import AuthContext from "../../../Context/Context";
 
 const BookingModal = ({ setBookingProduct, bookingProduct }) => {
@@ -21,7 +21,7 @@ const BookingModal = ({ setBookingProduct, bookingProduct }) => {
     };
     // axios POST request
     const options = {
-      url: "http://localhost:5000/bookings",
+      url: "https://betacom-server-cristain333.vercel.app/bookings",
       method: "POST",
       headers: {
         Accept: "application/json",

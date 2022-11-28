@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiFillDelete } from "react-icons/ai";
+import Myloader from "../../../Shared/MyLoader/Myloader";
 
 const Reports = () => {
-  const { data: reportedItem = [], refetch } = useQuery({
+  const [errorMessage,setErrorMessage]=useState('');
+  const { data: reportedItem = [], refetch , isLoading } = useQuery({
     queryKey: ["reportedItem"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reports", {
+      const res = await fetch("https://betacom-server-cristain333.vercel.app/reports", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
@@ -17,16 +19,22 @@ const Reports = () => {
     },
   });
   const handleDelete = (reports) => {
+    setErrorMessage('');
     const agree = window.confirm("Are You Sure You Want To Delete");
     if (agree) {
-      fetch(`http://localhost:5000/report/${reports.productId}`, {
+      fetch(`https://betacom-server-cristain333.vercel.app/report/${reports.productId}`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
         body: JSON.stringify(reports),
       })
-        .then((res) => res.json())
+        .then((res) =>{
+          if(res.status === 403){
+            setErrorMessage(`You Don't Have Permission To Delete Product `)
+          };
+          return res.json()
+        })
         .then((data) => {
           if (data.deletedCount) {
             toast.success("Product Deleted SuccessFull");
@@ -35,10 +43,14 @@ const Reports = () => {
         });
     }
   };
+  if (isLoading) {
+    return <Myloader></Myloader>;
+  }
 
   return (
     <div>
       <h2 className="text-3xl">All Reports By Users</h2>
+      <p className="text-red-500">{errorMessage}</p>
       <Toaster></Toaster>
       <div className="overflow-x-auto mt-5">
         <table className="table w-full">
@@ -71,6 +83,7 @@ const Reports = () => {
                     <AiFillDelete className="text-2xl text-white"></AiFillDelete>
                     Delete
                   </button>
+                 
                 </td>
               </tr>
             ))}

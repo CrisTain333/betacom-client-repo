@@ -2,69 +2,73 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## `WebSite Name : Betacom`
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## `Live Link `
+https://betacom5.web.app/
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Betacom is An Used Laptop Buy & Sale  Website. Where Any One Can Buy Or Sale Used Laptop.\
+In This Website Seller can Create Seller Account And Post Product , Also Buyers Can Buy .\
+Laptops , This Website Has An Powerful Admin Dashboard.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ ## `Features and Functionality`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+⚫️ Used React Router V6  For Routes .
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+⚫️ Used Firebase For Authentication.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+⚫️ You can Login With Google .
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+⚫️ Used Environment Variables To Hide Some Secret Data.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+⚫️ If You Are Seller You Can Add Product & Delete Your Own Product & Advertise Product.
 
-## Learn More
+⚫️ Admin can verify seller,Delete Seller & Buyers, also Can Delete Reported Product.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+⚫️ Buyers Can Buy Product & Complete Secure Payment.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+⚫️ We Used Admin Routes , Sellers Route And Buyers Route.
 
-### Code Splitting
+⚫️ We Used React-Router Advance Concepts And Protected Routes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+⚫️ Used React Hot Toast To show Errors & SuccessFull Messages.
 
-### Analyzing the Bundle Size
+⚫️ Buyers Can Report An Product.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+⚫️ Used TanStack Query & Axios.
 
-### Making a Progressive Web App
+⚫️ Used MongoDb For Database .
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+⚫️ Used Jwt For Securing Api And For Admin & Sellers Actions.  
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+ ## `Frameworks & Libraries , Package We Used In This Website`
 
-### `npm run build` fails to minify
+ `React-Router-Dom V6`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ `Tailwind`
+
+ `Firebase`
+
+ `React Photo View`
+
+ `React Hot Toast`
+
+ `daysiUi`
+
+ `TanStack Query`
+ 
+ `Axios`
+
+
+
+

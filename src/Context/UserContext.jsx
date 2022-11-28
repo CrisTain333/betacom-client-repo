@@ -38,9 +38,9 @@ const UserContext = ({children}) => {
         .catch((error) => {});
     };
   
-    const updateUser = (name) => {
+    const updateUser = (name,photo) => {
      return  updateProfile(auth.currentUser, {
-        displayName: name,
+        displayName: name,photoURL: photo
       })
     };
 

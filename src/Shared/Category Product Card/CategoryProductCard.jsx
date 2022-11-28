@@ -38,7 +38,7 @@ const CategoryProductCard = ({ data, setBookingProduct }) => {
 
 
     if(agree){
-      fetch(`http://localhost:5000/report/${id}`,{
+      fetch(`https://betacom-server-cristain333.vercel.app/report/${id}`,{
       method:'POST',
       headers:{
         'content-type':'application/json '
