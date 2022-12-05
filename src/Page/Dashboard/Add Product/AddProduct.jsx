@@ -4,29 +4,28 @@ import toast, { Toaster } from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../../Context/Context";
+import useIsSellerVerifyed from "../../../hooks/useIsSellerVerifyed";
 
 const AddProduct = () => {
   const [isLoading, setLoading] = useState(false);
-  const {user} = useContext(AuthContext);
-  const [errorMessage,setErrorMessage]=useState('');
-  const navigate = useNavigate()
+  const { user } = useContext(AuthContext);
+  const [IsSellerVerifyed] = useIsSellerVerifyed(user?.email);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
   const current = new Date();
-    const time = current.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const today  = new Date();
-    const options = {  year: 'numeric', month: 'short', day: 'numeric' };
+  const time = current.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const today = new Date();
+  const options = { year: "numeric", month: "short", day: "numeric" };
 
-    const date = today.toLocaleDateString("en-US", options)
-    
-    const handleSubmit = (e) => {
-  setErrorMessage('');
-        e.preventDefault();
-        const form = e.target;
-        
-        
-        
+  const date = today.toLocaleDateString("en-US", options);
+
+  const handleSubmit = (e) => {
+    setErrorMessage("");
+    e.preventDefault();
+    const form = e.target;
 
     const productName = form.productName.value;
     const productPrice = form.productPrice.value;
@@ -42,18 +41,24 @@ const AddProduct = () => {
     const description = form.description.value;
     const uri = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgKey}`;
     let categoryId;
-    if(brandName === 'Apple'){
-        categoryId = '01'
+    if (brandName === "Apple") {
+      categoryId = "01";
     }
-    if(brandName === 'HP'){
-        categoryId = '02'
+    if (brandName === "HP") {
+      categoryId = "02";
     }
-    if(brandName === 'DELL'){
-        categoryId = '03'
+    if (brandName === "DELL") {
+      categoryId = "03";
     }
 
+    let isVerified;
+    if(IsSellerVerifyed){
+      isVerified = true;
+    }else{
+      isVerified = false
+    }
 
-    setLoading(true)
+    setLoading(true);
     fetch(uri, {
       method: "POST",
       body: formData,
@@ -66,18 +71,18 @@ const AddProduct = () => {
             img: data.data.display_url,
             brandName,
             productName,
-            ResalePrice:productPrice,
+            ResalePrice: productPrice,
             originalPrice,
-            YearsOfUse:yearOfPurchase,
+            YearsOfUse: yearOfPurchase,
             location,
-            sellerName:user.displayName,
-            publishTime:`${date} ${time}`,
-            isVerifyed: false,
+            sellerName: user.displayName,
+            publishTime: `${date} ${time}`,
+            isVerifyed: isVerified,
             isReported: false,
             email: user?.email,
             description,
             phoneNumber,
-            conditionType
+            conditionType,
           };
 
           const options = {
@@ -90,40 +95,40 @@ const AddProduct = () => {
             },
             data: product,
           };
-       
-            axios(options).then((response) => {
-              if(response.data.acknowledged){
-                  toast.success('Successfully Product Added');
-                  setLoading(false)
-                  form.reset()
-                  setTimeout(()=>{
-                    //code goes here
-                    navigate('/dashboard/my/products')
-                 },2000); 
-  
+
+          axios(options)
+            .then((response) => {
+              if (response.data.acknowledged) {
+                toast.success("Successfully Product Added");
+                setLoading(false);
+                form.reset();
+                setTimeout(() => {
+                  //code goes here
+                  navigate("/dashboard/my/products");
+                }, 2000);
               }
-            }).catch(error =>{
+            })
+            .catch((error) => {
               if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
-                if(error.response.status === 403){
-                  setErrorMessage(`You Don't Have Permission To Add Product `)
-                };
+                if (error.response.status === 403) {
+                  setErrorMessage(`You Don't Have Permission To Add Product `);
+                }
               }
               setLoading(false);
-            })
-          
+            });
         }
       })
-      .catch(error =>{
-        console.log(error.response)
+      .catch((error) => {
+        console.log(error.response);
         setLoading(false);
-      })
+      });
   };
 
   return (
     <div>
-    <Toaster></Toaster>
+      <Toaster></Toaster>
       <div className="max-w-screen-md mx-auto p-5">
         <div className="text-center mb-16">
           <h3 className="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight text-gray-900">
@@ -136,7 +141,7 @@ const AddProduct = () => {
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Product Name
               </label>
@@ -150,7 +155,7 @@ const AddProduct = () => {
             <div className="w-full md:w-1/2 px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-last-name"
+                htmlFor="grid-last-name"
               >
                 Product Price
               </label>
@@ -166,12 +171,12 @@ const AddProduct = () => {
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Brand Name
               </label>
               <select
-              required
+                required
                 name="brandName"
                 className=" block w-full text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               >
@@ -183,7 +188,7 @@ const AddProduct = () => {
             <div className="w-full md:w-1/2 px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-last-name"
+                htmlFor="grid-last-name"
               >
                 Phone Number
               </label>
@@ -199,7 +204,7 @@ const AddProduct = () => {
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Location
               </label>
@@ -213,7 +218,7 @@ const AddProduct = () => {
             <div className="w-full md:w-1/2 px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-last-name"
+                htmlFor="grid-last-name"
               >
                 Year of purchase
               </label>
@@ -229,7 +234,7 @@ const AddProduct = () => {
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Original Price
               </label>
@@ -243,12 +248,12 @@ const AddProduct = () => {
             <div className="w-full md:w-1/2 px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-last-name"
+                htmlFor="grid-last-name"
               >
                 Condition Type
               </label>
               <select
-              required
+                required
                 name="conditionType"
                 id=""
                 className=" block w-full text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -263,12 +268,12 @@ const AddProduct = () => {
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-password"
+                htmlFor="grid-password"
               >
                 Product Image
               </label>
               <input
-              required
+                required
                 type="file"
                 className="file-input file-input-bordered file-input-primary w-full max-w-xs"
                 name="image"
@@ -280,12 +285,12 @@ const AddProduct = () => {
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-               htmlFor="grid-password"
+                htmlFor="grid-password"
               >
                 Description
               </label>
               <textarea
-              required
+                required
                 rows="3"
                 className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 name="description"
@@ -298,24 +303,24 @@ const AddProduct = () => {
                 className="shadow bg-primary hover:bg-red-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
                 type="submit"
               >
-              {
-                isLoading?<>
-                <ThreeCircles
-                height="45"
-                width="45"
-                color="#ffffff"
-                wrapperStyle={{}}
-                wrapperclassName=""
-                visible={true}
-                ariaLabel="three-circles-rotating"
-                outerCircleColor=""
-                innerCircleColor=""
-                middleCircleColor=""
-              />
-
-                </>: 'Add'
-              }
-               
+                {isLoading ? (
+                  <>
+                    <ThreeCircles
+                      height="45"
+                      width="45"
+                      color="#ffffff"
+                      wrapperStyle={{}}
+                      wrapperclassName=""
+                      visible={true}
+                      ariaLabel="three-circles-rotating"
+                      outerCircleColor=""
+                      innerCircleColor=""
+                      middleCircleColor=""
+                    />
+                  </>
+                ) : (
+                  "Add"
+                )}
               </button>
             </div>
           </div>

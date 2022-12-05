@@ -5,7 +5,7 @@ import useAdmin from "../../hooks/useAdmin";
 import useNormalUser from "../../hooks/useNormalUser";
 import useSellerAccount from "../../hooks/useSellerAccount";
 import Navbar from "../../Shared/Navbar/Navbar";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineShoppingCart  , AiOutlineHome} from "react-icons/ai";
 import { FaLuggageCart, FaUsersCog } from "react-icons/fa";
 import { IoBagAddSharp } from "react-icons/io5";
 import { TbMessageReport } from "react-icons/tb";
@@ -47,11 +47,6 @@ const DashBoardLayout = () => {
             {/* <!-- Sidebar content here --> */}
             <li>
               <div className="flex flex-col justify-center   rounded-xl  dark:bg-gray-900 dark:text-gray-100">
-                {/* <img
-                  src="https://i.ibb.co/5c9fBpN/Emely-Gutierrez.jpg"
-                  alt=""
-                  className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square"
-                /> */}
                 <PhotoProvider>
                   <PhotoView src={user?.photoURL}>
                   <div className="avatar online">

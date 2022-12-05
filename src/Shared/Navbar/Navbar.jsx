@@ -142,7 +142,7 @@ const Navbar = () => {
               </Link>
             </li>
             }
-            
+{/*             
             <li>
               <Link
                 to="/blog"
@@ -150,7 +150,7 @@ const Navbar = () => {
               >
                 Blog
               </Link>
-            </li>
+            </li> */}
           </ul>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
@@ -250,14 +250,14 @@ const Navbar = () => {
               </Link>
             </li>
             }
-            <li>
+            {/* <li>
               <Link
                 to="/blog"
                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 Blog
               </Link>
-            </li>
+            </li> */}
                       <li>
                         {user ? (
                           <button

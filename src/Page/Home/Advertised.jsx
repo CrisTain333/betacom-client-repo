@@ -76,13 +76,6 @@ console.log(data)
                         {p?.productName?.slice(0, 30)}
                       </h1>
 
-                      <p className="py-2 text-gray-700 dark:text-gray-400">
-                        {p.description?.slice(0, 100)}...
-                      </p>
-                      <p className="py-2 text-gray-700 dark:text-gray-400">
-                        Condition : {p.conditionType}
-                      </p>
-
                       <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                         <GiPriceTag className="text-2xl"></GiPriceTag>
 
