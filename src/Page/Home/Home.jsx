@@ -3,14 +3,11 @@ import React from "react";
 import Advertised from "./Advertised";
 import ProductCategories from "./ProductCategories";
 import brnadImage from "../../image/top-view-freelance-asian-lady-using-laptop-shopping-online-with-credit-card-table.jpg";
-import 'react-multi-carousel/lib/styles.css';
+import "react-multi-carousel/lib/styles.css";
 import Steps from "./Steps";
 
 const Home = () => {
-
-
-
-  const { data: advertisedProduct = [] } = useQuery({
+  const { data: advertisedProduct = [], isLoading } = useQuery({
     queryKey: ["advertisedProduct"],
     queryFn: async () => {
       const res = await fetch(
@@ -57,16 +54,19 @@ const Home = () => {
       {/* Advertised Section */}
       <div>
         {advertisedProduct && (
-          <Advertised data={advertisedProduct}></Advertised>
+          <Advertised
+            data={advertisedProduct}
+            isLoading={isLoading}
+          ></Advertised>
         )}
       </div>
-      
+
       {/* Product Categories Section */}
       <div className="my-16">
         <ProductCategories></ProductCategories>
       </div>
 
-          {/* Steps Section */}
+      {/* Steps Section */}
       <div>
         <Steps></Steps>
       </div>
