@@ -43,73 +43,62 @@ const SingUp = () => {
           email: user.email,
         };
 
-        
         //upload Image
         fetch(uri, {
           method: "POST",
           body: formData,
         })
-        .then((res) => res.json())
-        .then(data =>{
-          if (data.status === 200) {
-
-            const usersInfo = {
-              email: user.email,
-              name,
-              accountType,
-              isVerifyed: false,
-              img:data.data.display_url
-            };
-
-
-
-
-            updateUser(name,data.data.display_url)
-            .then((res) => {
-              // axios POST request
-              const options = {
-                url: "https://betacom-server-cristain333.vercel.app/users",
-                method: "POST",
-                headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json;charset=UTF-8",
-                },
-                data: usersInfo,
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status === 200) {
+              const usersInfo = {
+                email: user.email,
+                name,
+                accountType,
+                isVerifyed: false,
+                img: data.data.display_url,
               };
-  
-              axios(options).then((response) => {
-                if (response.data.acknowledged){
+
+              updateUser(name, data.data.display_url)
+                .then((res) => {
+                  // axios POST request
                   const options = {
-                    url: "https://betacom-server-cristain333.vercel.app/jwt",
+                    url: "https://betacom-server-cristain333.vercel.app/users",
                     method: "POST",
                     headers: {
                       Accept: "application/json",
                       "Content-Type": "application/json;charset=UTF-8",
                     },
-                    data: userEmail,
+                    data: usersInfo,
                   };
+
                   axios(options).then((response) => {
-                    if (response.status === 200) {
-                      const token = response.data;
-                      localStorage.setItem("authToken", token);
-                      setIsLoading(false);
-                      navigate(from, { replace: true });
+                    if (response.data.acknowledged) {
+                      const options = {
+                        url: "https://betacom-server-cristain333.vercel.app/jwt",
+                        method: "POST",
+                        headers: {
+                          Accept: "application/json",
+                          "Content-Type": "application/json;charset=UTF-8",
+                        },
+                        data: userEmail,
+                      };
+                      axios(options).then((response) => {
+                        if (response.status === 200) {
+                          const token = response.data;
+                          localStorage.setItem("authToken", token);
+                          setIsLoading(false);
+                          navigate(from, { replace: true });
+                        }
+                      });
                     }
                   });
-                }
-              });
-            })
-            .catch((err) => {
-              setIsLoading(false);
-            });
-
-
-
-
-          }
-        })
-
-          
+                })
+                .catch((err) => {
+                  setIsLoading(false);
+                });
+            }
+          });
       })
       .catch((err) => {
         setIsLoading(false);
@@ -127,8 +116,8 @@ const SingUp = () => {
 
         const usersInfo = {
           email: user.email,
-          name : user.displayName,
-          accountType:'normalUser',
+          name: user.displayName,
+          accountType: "normalUser",
           isVerifyed: false,
         };
 
@@ -143,7 +132,7 @@ const SingUp = () => {
         };
 
         axios(options).then((response) => {
-          if (response){
+          if (response) {
             const options = {
               url: "https://betacom-server-cristain333.vercel.app/jwt",
               method: "POST",
@@ -209,8 +198,14 @@ const SingUp = () => {
                       Profile Picture{" "}
                     </label>
                     <div className="flex">
-		<input type="file" name="image" id="files" required className="px-5 py-3 border-2 border-dashed rounded-md w-full" />
-	</div>
+                      <input
+                        type="file"
+                        name="image"
+                        id="files"
+                        required
+                        className="px-5 py-3 border-2 border-dashed rounded-md w-full"
+                      />
+                    </div>
                   </div>
                   <div>
                     <label
@@ -286,8 +281,8 @@ const SingUp = () => {
                     >
                       {isLoadin ? (
                         <ThreeCircles
-                          height="50"
-                          width="50"
+                          height="35"
+                          width="35"
                           color="#ffffff"
                           wrapperStyle={{}}
                           wrapperclassName=""
