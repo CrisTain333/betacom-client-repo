@@ -2,104 +2,13 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../Context/Context";
 import logo from "../../image/nav.png";
-import { AiOutlineDoubleRight } from 'react-icons/ai';
-import { FiLogOut } from 'react-icons/fi';
+import { AiOutlineDoubleRight } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, singOutUser} = useContext(AuthContext)
+  const { user, singOutUser } = useContext(AuthContext);
 
-
-  // const li = (
-
-  //   <>
-  //   {
-  //     isSellers&&<>
-  //     <li>
-  //       <Link
-  //         href="/"
-  //         aria-label="Our product"
-  //         title="Our product"
-  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-  //       >
-  //       Add A product
-  //       </Link>
-  //     </li>
-  //     <li>
-  //       <Link
-  //         href="/"
-  //         aria-label="Product pricing"
-  //         title="Product pricing"
-  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-  //       >
-  //        My Products
-  //       </Link>
-  //     </li>
-
-  //     </>
-  //   }
-  //   {
-  //     isBuyer&&<>
-  //     <li>
-  //       <Link
-  //         href="/"
-  //         aria-label="Our product"
-  //         title="Our product"
-  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-  //       >
-  //         My Orders
-  //       </Link>
-  //     </li>
-  //     </>
-  //   }
-  //   {
-  //     isAdmin?<>
-
-  //     <li>
-  //       <Link
-  //         href="/"
-  //         aria-label="About us"
-  //         title="About us"
-  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-  //       >
-  //         All Sellers
-  //       </Link>
-  //     </li>
-  //     <li>
-  //       <Link
-  //         href="/"
-  //         aria-label="About us"
-  //         title="About us"
-  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-  //       >
-  //         All Buyers
-  //       </Link>
-  //     </li>
-  //     <li>
-  //       <Link
-  //         href="/"
-  //         aria-label="About us"
-  //         title="About us"
-  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-  //       >
-  //         Reported Items
-  //       </Link>
-  //     </li>
-  //     </>:''
-  //   }
-
-  //     <li>
-  //       <Link
-  //         href="/"
-  //         aria-label="About us"
-  //         title="About us"
-  //         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-  //       >
-  //         Blog
-  //       </Link>
-  //     </li>
-  //   </>
-  // );
   return (
     <div>
       <div className="px-4 py-5 z-50 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 shadow">
@@ -115,15 +24,11 @@ const Navbar = () => {
               etacom
             </span>
           </Link>
-          <label
-            htmlFor="my-drawer-2"
-            className="drawer-button lg:hidden"
-          >
-           <AiOutlineDoubleRight className="text-3xl font-bold mb-4 text-black"></AiOutlineDoubleRight>
-           
+          <label htmlFor="my-drawer-2" className="drawer-button lg:hidden">
+            <AiOutlineDoubleRight className="text-3xl font-bold mb-4 text-black"></AiOutlineDoubleRight>
           </label>
           <ul className="flex items-center hidden space-x-8 lg:flex">
-          <li>
+            <li>
               <Link
                 to="/"
                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -131,33 +36,23 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            {
-              user&&<li>
-              <Link
-                to="/dashboard"
-                aria-label="About us"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-              >
-                DashBoard
-              </Link>
-            </li>
-            }
-{/*             
-            <li>
-              <Link
-                to="/blog"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-              >
-                Blog
-              </Link>
-            </li> */}
+            {user && (
+              <li>
+                <Link
+                  to="/dashboard"
+                  aria-label="About us"
+                  className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                >
+                  DashBoard
+                </Link>
+              </li>
+            )}
           </ul>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
               {user ? (
                 <button
                   className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-gray-700 transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none hover:bg-primary hover:text-white"
-                  
                   onClick={singOutUser}
                 >
                   Logout <FiLogOut className="ml-1"></FiLogOut>
@@ -231,26 +126,26 @@ const Navbar = () => {
                   </div>
                   <nav>
                     <ul className="space-y-4">
-                    <li>
-              <Link
-                to="/"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-              >
-                Home
-              </Link>
-            </li>
-                    {
-              user&&<li>
-              <Link
-                to="/dashboard"
-                aria-label="About us"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-              >
-                DashBoard
-              </Link>
-            </li>
-            }
-            {/* <li>
+                      <li>
+                        <Link
+                          to="/"
+                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        >
+                          Home
+                        </Link>
+                      </li>
+                      {user && (
+                        <li>
+                          <Link
+                            to="/dashboard"
+                            aria-label="About us"
+                            className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          >
+                            DashBoard
+                          </Link>
+                        </li>
+                      )}
+                      {/* <li>
               <Link
                 to="/blog"
                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
