@@ -145,14 +145,7 @@ const Navbar = () => {
                           </Link>
                         </li>
                       )}
-                      {/* <li>
-              <Link
-                to="/blog"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-              >
-                Blog
-              </Link>
-            </li> */}
+
                       <li>
                         {user ? (
                           <button
