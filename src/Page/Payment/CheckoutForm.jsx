@@ -1,4 +1,8 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  CardElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
@@ -7,7 +11,6 @@ import logo from "../../image/nav.png";
 
 const CheckoutForm = ({ data, success, setSuccess }) => {
   const { ResalePrice, _id, productName, productId } = data;
-  console.log(productId);
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
@@ -49,17 +52,17 @@ const CheckoutForm = ({ data, success, setSuccess }) => {
     }
 
     // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card,
-    });
+    const { error, paymentMethod } =
+      await stripe.createPaymentMethod({
+        type: "card",
+        card,
+      });
 
     if (error) {
       setErrorMessage(error.message);
     } else {
       setErrorMessage("");
     }
-    console.log(paymentMethod);
     setProcessing(true);
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -87,18 +90,25 @@ const CheckoutForm = ({ data, success, setSuccess }) => {
         bookingId: _id,
         productName,
       };
-      fetch("https://betacom-server-cristain333.vercel.app/payments", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `bearer ${localStorage.getItem("authToken")}`,
-        },
-        body: JSON.stringify(payment),
-      })
+      fetch(
+        "https://betacom-server-cristain333.vercel.app/payments",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem(
+              "authToken"
+            )}`,
+          },
+          body: JSON.stringify(payment),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {
-            toast.success("Congrats! your payment completed");
+            toast.success(
+              "Congrats! your payment completed"
+            );
             setSuccess("Congrats! your payment completed");
             setTransactionId(paymentIntent.id);
           }
@@ -129,16 +139,22 @@ const CheckoutForm = ({ data, success, setSuccess }) => {
                     <h3 className="text-xl font-bold text-gray-900 mb-1">
                       Invoice from <span>Betacom</span>
                     </h3>
-                    <p className="text-green-500 text-xl">{success}</p>
+                    <p className="text-green-500 text-xl">
+                      {success}
+                    </p>
                     <div className="text-sm font-medium text-gray-500">
                       Your TransactionId :{" "}
-                      <span className="font-bold">{transactionId}</span>
+                      <span className="font-bold">
+                        {transactionId}
+                      </span>
                     </div>
                   </header>
                   {/* <!-- Card body --> */}
                   <div className="bg-gray-100 text-center px-5 py-6">
                     <div className="text-sm mb-6">
-                      <h3 className="text-2xl">Payment Completed For</h3>
+                      <h3 className="text-2xl">
+                        Payment Completed For
+                      </h3>
                       <strong className="text-xl font-bold text-gray-700">
                         {productName}
                       </strong>
@@ -152,7 +168,10 @@ const CheckoutForm = ({ data, success, setSuccess }) => {
       ) : (
         <>
           <Toaster></Toaster>
-          <form onSubmit={handleSubmit} className="ml-5 mr-5">
+          <form
+            onSubmit={handleSubmit}
+            className="ml-5 mr-5"
+          >
             <label htmlFor="name">Name</label>
             <input
               type="text"
@@ -197,7 +216,9 @@ const CheckoutForm = ({ data, success, setSuccess }) => {
                 },
               }}
             />
-            <p className="text-red-500 text-lg mt-5">{errorMessage}</p>
+            <p className="text-red-500 text-lg mt-5">
+              {errorMessage}
+            </p>
             <div className="w-full mx-auto">
               <div className="mx-auto">
                 <button

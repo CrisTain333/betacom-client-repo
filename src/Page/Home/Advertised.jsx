@@ -10,7 +10,6 @@ import { ThreeCircles } from "react-loader-spinner";
 
 const Advertised = ({ data, isLoading }) => {
   const { user } = useContext(AuthContext);
-  console.log(data);
 
   if (isLoading) {
     if (isLoading) {
@@ -129,13 +128,17 @@ const Advertised = ({ data, isLoading }) => {
                             />
                           </svg>
 
-                          <h1 className="px-2 text-sm">{p.location}</h1>
+                          <h1 className="px-2 text-sm">
+                            {p.location}
+                          </h1>
                         </div>
 
                         <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                           <AiFillPhone className="text-2xl"></AiFillPhone>
 
-                          <h1 className="px-2 text-sm">{p.phoneNumber}</h1>
+                          <h1 className="px-2 text-sm">
+                            {p.phoneNumber}
+                          </h1>
                         </div>
                       </div>
                     </Link>
